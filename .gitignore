@@ -1,3 +1,4 @@
 khoom
 *.o
 deps.mk
+Textures/Planets/src/*

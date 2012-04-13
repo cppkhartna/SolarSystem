@@ -8,6 +8,7 @@ GLfloat LightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f };
 GLUquadricObj *quadratic;	
 TextureManager tm = TextureManager();
 Body body;
+Rings rings;
 
 void init(int width, int height)
 {
@@ -36,7 +37,10 @@ void init(int width, int height)
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     //glColor4f(1.0f, 1.0f, 1.0f, 0.5);
 
-    body.init(1.3f, tm.getTexture("crate.bmp"));
+    //body.init(1.2f, tm.getTexture("Textures/Planets/saturn.bmp"));
+    //rings.init(1.4f, 2.8f, tm.getTexture("Textures/Planets/saturn-rings.bmp"));
+    body.init(1.0f, tm.getTexture("Textures/Planets/uranus.bmp"));
+    rings.init(1.2f, 4.0f, tm.getTexture("Textures/Planets/uranus-rings.bmp"));
 }
 void display()
 {
@@ -49,6 +53,7 @@ void display()
     //glRotatef(yrot,0.0f,1.0f,0.0f);
 
     body.Draw();
+    rings.Draw();
 	glFlush();
     glutSwapBuffers();
 }

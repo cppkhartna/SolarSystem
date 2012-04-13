@@ -29,3 +29,17 @@ private:
     double R;
     GLuint texture;
 };
+
+class Rings: public Drawable
+{
+public:
+    Rings (){};
+    void init (double R1, double R2, GLuint texture);
+    virtual ~Rings (){};
+    void DrawObject();
+
+private:
+    /* data */
+    double R1, R2;
+    GLuint texture;
+};
