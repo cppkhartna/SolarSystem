@@ -1,23 +1,16 @@
-#include <string>
-
-#include <boost/program_options.hpp>
-#include <boost/format.hpp>
-
 #include "TextureManager.h"
 #include "Drawable.h"
-
-
-namespace po = boost::program_options;
 
 GLfloat LightAmbient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 GLfloat LightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat LightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f };
 
 GLUquadricObj *quadratic;	
+TextureManager tm = TextureManager();
 Body body;
 Rings rings;
 
-bool init(int width, int height, std::string& planet, TextureManager &tm)
+void init(int width, int height)
 {
 	glEnable(GL_TEXTURE_2D);		
 
@@ -44,24 +37,10 @@ bool init(int width, int height, std::string& planet, TextureManager &tm)
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     //glColor4f(1.0f, 1.0f, 1.0f, 0.5);
 
-    // proper way would be
-    //body.init(1.0f, tm.getTexture(boost::format("Textures/Planets/%s.bmp") % planet));
-    //rings.init(1.2f, 4.0f, tm.getTexture(boost::format("Textures/Planets/%s-rings.bmp") % planet));
-
-    if (planet == "saturn") {
-        body.init(1.2f, tm.getTexture("Textures/Planets/saturn.bmp"));
-        rings.init(1.4f, 2.8f, tm.getTexture("Textures/Planets/saturn-rings.bmp"));
-    }
-    else if (planet == "uranus") {
-        body.init(1.0f, tm.getTexture("Textures/Planets/uranus.bmp"));
-        rings.init(1.2f, 4.0f, tm.getTexture("Textures/Planets/uranus-rings.bmp"));
-    }
-    else {
-        return false;
-    }
-
-
-    return true;
+    //body.init(1.2f, tm.getTexture("Textures/Planets/saturn.bmp"));
+    //rings.init(1.4f, 2.8f, tm.getTexture("Textures/Planets/saturn-rings.bmp"));
+    body.init(1.0f, tm.getTexture("Textures/Planets/uranus.bmp"));
+    rings.init(1.2f, 4.0f, tm.getTexture("Textures/Planets/uranus-rings.bmp"));
 }
 void display()
 {
@@ -103,23 +82,6 @@ void specialKeyPressed(int key, int x, int y)
 }
 int main(int argc, char *argv[])
 {
-    std::string planet;
-
-    po::options_description desc("Options");
-    desc.add_options()
-        ("help,h",
-         "Produce help message")
-        ("planet",
-         po::value<std::string>(&planet)->default_value("saturn"));
-    po::variables_map vm;
-    po::store(po::parse_command_line(argc, argv, desc), vm);
-    po::notify(vm);
-
-    if(vm.count("help")) {
-        std::cout << desc << std::endl;
-        return 1;
-    }
-
     glutInit(&argc, argv);  
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);  
     glutInitWindowSize(640, 480);  
@@ -131,15 +93,8 @@ int main(int argc, char *argv[])
     glutReshapeFunc(&reshape);
     glutKeyboardFunc(&keyPressed);
     glutSpecialFunc(&specialKeyPressed);
-
-    TextureManager tm = TextureManager();
-    if (!init(640, 480, planet, tm)) {
-        std::cout << "failed to Йоба :(" << std::endl;
-        return -1;
-    }
-    else {
-        std::cout << "Йоба!" << std::endl;
-    }
+    init(640, 480);
+    std::cout << "Йоба!" << std::endl;
 
     glutMainLoop();  
 

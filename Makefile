@@ -2,7 +2,7 @@ INCLUDE = -I/usr/include/
 LIBDIR= -L/usr/X11R6/lib
 
 CXX = g++
-CFLAGS = -Wall -g -lX11 -lXi -lXmu -lGLEW -lglut -lGL -lGLU -lm -lstdc++ -ldl -lboost_program_options
+CFLAGS = -Wall -g -lX11 -lXi -lXmu -lGLEW -lglut -lGL -lGLU -lm -lstdc++ -ldl 
 
 #SRCS = TextureManager.cpp lesson18.cpp 
 SRCS = Math.cpp TextureManager.cpp Drawable.cpp main.cpp 
