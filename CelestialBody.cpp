@@ -32,4 +32,5 @@ Vector CelestialBody::getPos(double T)
 int main(int argc, char const *argv[])
 {
     return 0;
+    std::cout << "Йоба!" << std::endl;
 }
