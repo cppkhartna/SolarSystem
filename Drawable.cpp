@@ -1,18 +1,18 @@
 #include "Drawable.h"
-#include <cmath>
 
 void Drawable::Draw()
 {
     glPushMatrix();
-    //glLoadIdentity();
 
     glTranslated(position.X(), position.Y(), position.Z());	
 
     angle += w;
 
-    glRotated(angle.X(), axis.X(), 0, 0);
-    glRotated(angle.Y(), 0, axis.Y(), 0);
-    glRotated(angle.Z(), 0, 0, axis.Z());
+    glRotated(incl.X(), axis.X(), 0, 0);
+    glRotated(incl.Y(), 0, axis.Y(), 0);
+    glRotated(incl.Z(), 0, 0, axis.Z());
+
+    glRotated(angle, 0, 0, 1); // rotate around self-z
 
     glScaled(scale.X(), scale.Y(), scale.Z());
 
@@ -53,13 +53,12 @@ void Rings::DrawObject()
     glBindTexture(GL_TEXTURE_2D, texture); 
     glEnable(GL_TEXTURE_2D);
     int n = 360;
-    double Pi = 3.1415926;
 
     glBegin(GL_QUADS);
     for (int i = 0; i < n; ++i)
     {
-        double phi1 = 2*Pi*(double)i/(double)n;
-        double phi2 = 2*Pi*(i+1)/n;
+        double phi1 = 2*M_PI*(double)i/(double)n;
+        double phi2 = 2*M_PI*(i+1)/n;
 
         glTexCoord2f(0.0f, 1.0f);
         glVertex3d(R1*cos(phi1), R1*sin(phi1), 0);
@@ -74,3 +73,8 @@ void Rings::DrawObject()
 
     glDisable(GL_TEXTURE_2D);
 }
+
+void Drawable::setPos(Vector pos)
+{
+    position = pos;
+};

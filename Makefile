@@ -5,7 +5,7 @@ CXX = g++
 CFLAGS = -Wall -g -lX11 -lXi -lXmu -lGLEW -lglut -lGL -lGLU -lm -lstdc++ -ldl 
 
 #SRCS = TextureManager.cpp lesson18.cpp 
-SRCS = Math.cpp TextureManager.cpp Drawable.cpp main.cpp 
+SRCS = Math.cpp CelestialBody.cpp TextureManager.cpp Drawable.cpp main.cpp 
 OBJS = $(SRCS:.cpp=.o)
 default: khoom
 

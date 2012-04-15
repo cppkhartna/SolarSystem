@@ -4,15 +4,17 @@
 class Drawable
 {
 public:
-    Drawable (): axis(1, 1, 1), position(0, 0, 0), angle(0, 0, 0), scale(1, 1, 1), 
-    w(0.02, 0.02, 0.02)
+    Drawable (): axis(1, 1, 1), position(0, 0, 0), incl(45, 45, 0), scale(1, 1, 1), 
+    w(0.2), angle(0)
     {};
     virtual ~Drawable (){};
     void Draw();
+    void setPos(Vector pos);
     virtual void DrawObject(){};
 
 private:
-	Vector axis, position, angle, scale, w;
+	Vector axis, position, incl, scale;
+    double angle, w;
 };
 
 class Body: public Drawable

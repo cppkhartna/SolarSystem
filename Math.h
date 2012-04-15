@@ -1,4 +1,10 @@
 #include <iostream>
+#include <cmath>
+
+#include <cfloat>
+const double eps_mach = DBL_EPSILON;
+
+class Matrix;
 class Vector
 {
 public:
@@ -21,9 +27,14 @@ public:
     operator double*();
     friend std::ostream& operator << (std::ostream& os, const Vector& vec);
 
+    friend Vector operator*(const Matrix& Mat, const Vector& Vec);
+    friend Vector operator*(const Vector& Vec, const Matrix& Mat);
+
     double X();
     double Y();
     double Z();
+
+    friend class Matrix;
 
 private:
     /* data */
@@ -35,10 +46,32 @@ class Matrix
 public:
     Matrix();
     Matrix(const Vector& e_1, const Vector& e_2, const Vector& e_3);
-    virtual ~Matrix();
-    
+    ~Matrix(){};
+    friend Matrix id();
+
+    friend Matrix R_x(double RotAngle);
+    friend Matrix R_y(double RotAngle);
+    friend Matrix R_z(double RotAngle);
+    friend Matrix Transp(const Matrix& Mat);
+
+    friend Matrix operator*(double fScalar, const Matrix& Mat);
+    friend Matrix operator*(const Matrix& Mat, double fScalar);
+    friend Matrix operator/(const Matrix& Mat, double fScalar);
+    friend Vector operator*(const Matrix& Mat, const Vector& Vec);
+    friend Vector operator*(const Vector& Vec, const Matrix& Mat);
+    friend Matrix operator-(const Matrix& Mat);
+    friend Matrix operator+(const Matrix& left, const Matrix& right);
+    friend Matrix operator-(const Matrix& left, const Matrix& right);    
+    friend Matrix operator*(const Matrix& left, const Matrix& right);
+    friend std::ostream& operator << (std::ostream& os, const Matrix& Mat);
 
 private:
     /* data */
-    double Mat[3][3];  
+    double m_Mat[3][3];  
 };
+
+Matrix R_x(double RotAngle);
+Matrix R_y(double RotAngle);
+Matrix R_z(double RotAngle);
+double Frac (double x);
+double Modulo (double x, double y);
