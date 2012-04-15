@@ -67,7 +67,8 @@ Vector SolSysBody::getPos(double T)
     }
     else
     {
-        pos = State(pos);
+        pos = State(T);
+        T_last = T;
         return pos;
     }
 }

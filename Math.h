@@ -75,3 +75,4 @@ Matrix R_y(double RotAngle);
 Matrix R_z(double RotAngle);
 double Frac (double x);
 double Modulo (double x, double y);
+Matrix GaussVec(double Omega, double i, double omega);

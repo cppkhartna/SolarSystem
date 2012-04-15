@@ -6,7 +6,7 @@ const double Rad       = M_PI / 180.0;
 class SolSysBody: public CelestialBody
 {
 public:
-    SolSysBody (double, double, double, double, double, double, double);
+    SolSysBody(double a, double e, double M0, double n, double O, double i, double w);
     virtual ~SolSysBody (){};
     Vector State(double T);
     Vector Ellip(double GM, double M, double a, double e);
@@ -24,7 +24,7 @@ double EccAnom (double M, double e);
 class Satellite: public SolSysBody
 {
 public:
-    Satellite (double, double, double, double, double, double, double): SolSysBody (double, double, double, double, double, double, double);
+    Satellite (double a, double e, double M0, double n, double O, double i, double w): SolSysBody (a, e, M0, n, O, i, w) {};
     virtual ~Satellite () {};
     virtual Vector getPos(double T);
 
@@ -32,4 +32,3 @@ private:
     /* data */
     SolSysBody* link;
 };
-
