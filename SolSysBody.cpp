@@ -80,8 +80,8 @@ Vector SolSysBody::getPos(double T)
 
 Vector Satellite::getPos(double T)
 {
-    if (link != NULL)
+    if (planet != NULL)
     {
-        return setPos(link->getPos(T) + State(T));
+        return setPos(planet->getPos(T) + State(T));
     }
 }

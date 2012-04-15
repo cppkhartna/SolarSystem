@@ -31,5 +31,5 @@ public:
 
 private:
     /* data */
-    SolSysBody* link;
+    SolSysBody* planet;
 };
