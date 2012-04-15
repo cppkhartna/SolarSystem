@@ -41,9 +41,7 @@ void init(int width, int height)
     glEnable(GL_LIGHT1);                             	// turn light 1 on.
 
     glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA,GL_ONE);		
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-    //glColor4f(1.0f, 1.0f, 1.0f, 0.5);
 
     body.init(1.2f, tm.getTexture("Textures/Planets/saturn.bmp"));
     rings.init(1.4f, 2.8f, tm.getTexture("Textures/Planets/saturn-rings.bmp"));

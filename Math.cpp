@@ -323,3 +323,8 @@ double Modulo (double x, double y)
 {
    return y*Frac(x/y);
 }
+
+Matrix GaussVec(double Omega, double i, double omega)
+{
+  return R_z(-Omega) * R_x(-i) * R_z(-omega);
+}
