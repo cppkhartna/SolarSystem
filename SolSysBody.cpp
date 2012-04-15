@@ -59,6 +59,12 @@ double EccAnom (double M, double e)
   return E;
 }
 
+Vector SolSysBody::setPos(Vector vec)
+{
+    pos = vec;
+    return pos;
+}
+
 Vector SolSysBody::getPos(double T)
 {
     if (T == T_last)
@@ -67,8 +73,15 @@ Vector SolSysBody::getPos(double T)
     }
     else
     {
-        pos = State(T);
         T_last = T;
-        return pos;
+        return setPos(State(T));
+    }
+}
+
+Vector Satellite::getPos(double T)
+{
+    if (link != NULL)
+    {
+        return setPos(link->getPos(T) + State(T));
     }
 }

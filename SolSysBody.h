@@ -11,6 +11,7 @@ public:
     Vector State(double T);
     Vector Ellip(double GM, double M, double a, double e);
     virtual Vector getPos(double T);
+    Vector setPos(Vector vec);
 
 private:
     /* data */
