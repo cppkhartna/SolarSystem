@@ -76,9 +76,10 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     auto attr = elem->get_attributes();
                     int j=0;
                     double orb[7];
-                    for (auto i = attr.begin()++; i != attr.end(), j < 7; ++i, ++j)
+                    for (auto i = ++(attr.begin()); i != attr.end(), j < 7; ++i, ++j)
                     {
                         orb[j] = atof((*i)->get_value().c_str());
+                        std::cout << orb[j] << std::endl;
                     }
                     if (!type.compare("SolSysBody"))
                     {
