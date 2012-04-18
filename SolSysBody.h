@@ -9,14 +9,17 @@ public:
     SolSysBody(double a, double e, double M0, double n, double O, double i, double w);
     virtual ~SolSysBody (){};
     Vector State(double T);
-    Vector Ellip(double GM, double M, double a, double e);
+    virtual void Kepler(double GM, double M, double T, double a, double e);
+    void Ellip(double GM, double M, double a, double e);
     virtual Vector getPos(double T);
     Vector setPos(Vector vec);
+    Vector getVel() const;
 
 private:
     /* data */
     double a, e, M0, O, i, w, n;
     Vector pos;
+    Vector r, v; // temp vectors
     double T_last;
 };
 
@@ -28,6 +31,7 @@ public:
     Satellite (double a, double e, double M0, double n, double O, double i, double w): SolSysBody (a, e, M0, n, O, i, w) {};
     virtual ~Satellite () {};
     virtual Vector getPos(double T);
+    void setPlanet(SolSysBody* planet);
 
 private:
     /* data */

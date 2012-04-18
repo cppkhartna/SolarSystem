@@ -8,16 +8,21 @@ Vector SolSysBody::State(double T)
 
   double T0 = 0.0; // epoch J2000
   Matrix PQR;
-  Vector r;
 
-  r = Ellip(GM_Sun, Rad*(M0+n*(T-T0)), a, e); 
+  Kepler(GM_Sun, Rad*(M0+n*(T-T0)), T, a, e); 
   PQR = GaussVec(Rad*(O+p*T), Rad*i, Rad*(w-O));
   r = PQR*r;                                       
+  v = PQR*v;                                       
 
   return r;
 }
 
-Vector SolSysBody::Ellip(double GM, double M, double a, double e)
+void SolSysBody::Kepler(double GM, double M, double T, double a, double e)
+{
+    Ellip(GM, M, a, e);
+}
+
+void SolSysBody::Ellip(double GM, double M, double a, double e)
 {
   double k, E, cosE,sinE, fac, rho;
 
@@ -27,11 +32,12 @@ Vector SolSysBody::Ellip(double GM, double M, double a, double e)
   cosE = cos(E); 
   sinE = sin(E);
 
-  fac = sqrt ( (1.0-e)*(1.0+e) );  
+  fac = sqrt ((1.0-e)*(1.0+e));  
 
   rho = 1.0 - e*cosE;
 
-  return Vector(a*(cosE-e), a*fac*sinE, 0.0);
+  r = Vector(a*(cosE-e), a*fac*sinE, 0.0);
+  v = Vector(-k*sinE/rho, k*fac*cosE/rho, 0.0); 
 }
 
 double EccAnom (double M, double e)
@@ -59,6 +65,11 @@ double EccAnom (double M, double e)
   return E;
 }
 
+Vector SolSysBody::getVel() const
+{
+    return v;
+}
+
 Vector SolSysBody::setPos(Vector vec)
 {
     pos = vec;
@@ -67,7 +78,7 @@ Vector SolSysBody::setPos(Vector vec)
 
 Vector SolSysBody::getPos(double T)
 {
-    if (T == T_last)
+    if (T - T_last < eps_mach)
     {
         return pos;
     }
@@ -78,10 +89,19 @@ Vector SolSysBody::getPos(double T)
     }
 }
 
+void Satellite::setPlanet(SolSysBody* planet)
+{
+    this->planet = planet;
+}
+
 Vector Satellite::getPos(double T)
 {
     if (planet != NULL)
     {
         return setPos(planet->getPos(T) + State(T));
+    }
+    else 
+    {
+        return Vector();
     }
 }

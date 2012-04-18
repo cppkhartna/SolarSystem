@@ -301,8 +301,6 @@ Matrix operator*(const Matrix& left, const Matrix& right)
 
 ostream& operator << (ostream& os, const Matrix& Mat)
 {
-  int w = os.width();
-
   for (int i=0; i<3; i++) {
     os << " (";
     os << Mat.m_Mat[i][0] << ",";

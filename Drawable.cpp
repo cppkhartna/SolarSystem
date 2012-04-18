@@ -13,6 +13,8 @@ void Drawable::Draw()
     glRotated(incl.Z(), 0, 0, axis.Z());
 
     glRotated(angle, 0, 0, 1); // rotate around self-z
+    glRotated(angle, 0, 1, 1); // rotate around self-z
+    glRotated(angle, 1, 0, 1); // rotate around self-z
 
     glScaled(scale.X(), scale.Y(), scale.Z());
 
@@ -31,7 +33,7 @@ void Body::DrawObject()
     glDisable(GL_TEXTURE_2D);
 }
 
-void Body::init(double R, GLuint texture)
+Body::Body(double R, GLuint texture)
 {
     this->R = R;
     this->texture = texture;
@@ -41,7 +43,7 @@ void Body::init(double R, GLuint texture)
     gluQuadricTexture(sphere, GL_TRUE);
 }
 
-void Rings::init(double R1, double R2, GLuint texture)
+Rings::Rings(double R1, double R2, GLuint texture)
 {
     this->R1 = R1;
     this->R2 = R2;

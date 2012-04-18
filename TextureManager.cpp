@@ -129,6 +129,7 @@ GLuint TextureManager::loadTexture(string filename)
     Image source;
     source.loadBMP(filename);
 
+
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);  

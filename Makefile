@@ -1,20 +1,16 @@
-INCLUDE = -I/usr/include/
-LIBDIR= -L/usr/X11R6/lib
 
 CXX = g++
-CFLAGS = -Wall -g -lX11 -lXi -lXmu -lGLEW -lglut -lGL -lGLU -lm -lstdc++ -ldl 
+CXXFLAGS = -Wall -g -lX11 -lXi -lXmu -lGLEW -lglut -lGL -lGLU -lm -lstdc++ -ldl -std=c++11 $$(pkg-config --cflags --libs libxml++-2.6)
 
-#SRCS = TextureManager.cpp lesson18.cpp 
-#SRCS = Math.cpp CelestialBody.cpp TextureManager.cpp Drawable.cpp main.cpp 
-SRCS = Math.cpp TextureManager.cpp Drawable.cpp CelestialBody.cpp SolSysBody.cpp 
+SRCS = Math.cpp CelestialBody.cpp SolSysBody.cpp Comet.cpp SolarSystem.cpp TextureManager.cpp Drawable.cpp main.cpp 
 OBJS = $(SRCS:.cpp=.o)
 default: khoom
 
 %.o: %.cpp %.hpp 
-	$(CXX) $(CFLAGS)  -c $< -o $@ 
+	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 khoom: $(OBJS)
-	$(CXX) $(CFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 ifneq (clean, $(MAKECMDGOALS))
 -include deps.mk

@@ -1,4 +1,8 @@
 #include "CelestialBody.h"
+CelestialBody::~CelestialBody()
+{
+    seq.clear();
+}
 
 void CelestialBody::Draw()
 {
@@ -14,6 +18,11 @@ void CelestialBody::add(Drawable *object)
     seq.push_back(object);
 }
 
+void CelestialBody::remove()
+{
+    seq.pop_back();
+}
+
 void CelestialBody::nextFrame(double T)
 {
     Vector pos = getPos(T);
@@ -27,10 +36,4 @@ void CelestialBody::nextFrame(double T)
 Vector CelestialBody::getPos(double T)
 {
     return Vector();
-}
-
-int main(int argc, char const *argv[])
-{
-    std::cout << "Йоба!" << std::endl;
-    return 0;
 }
