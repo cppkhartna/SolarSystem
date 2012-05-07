@@ -6,7 +6,7 @@ GLfloat LightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 SolarSystem ss;
-double xpos = 100.0f, ypos, zpos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
+double xpos = 100.0f, ypos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
 double scale = 31.25f;
 #define ENTER 13
 #define ESCAPE 27
@@ -75,7 +75,7 @@ void reshape(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
+    gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 10000.0f);
     glMatrixMode(GL_MODELVIEW);
 }
 void keyPressed(unsigned char key, int x, int y) 
@@ -116,20 +116,18 @@ void specialKeyPressed(int key, int x, int y)
     switch (key) 
     {    
         case GLUT_KEY_PAGE_UP: 
-            lookupdown -= 0.2f;
+            lookupdown -= 1.0f;
             break;
 
         case GLUT_KEY_PAGE_DOWN:
             lookupdown += 1.0f;
             break;
         case GLUT_KEY_UP: 
-            xpos -= 0.05f;
-            zpos -= 0.05f;	
+            xpos -= 0.5f;
             break;
 
         case GLUT_KEY_DOWN: 
-            xpos += 0.05f;
-            zpos += 0.05f;	
+            xpos += 0.5f;
             break;
 
         case GLUT_KEY_LEFT:

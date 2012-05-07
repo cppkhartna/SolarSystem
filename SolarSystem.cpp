@@ -27,6 +27,7 @@ void SolarSystem::nextFrame()
 {
     if (moves || (!moves && steps))
     {
+        //TODO: extend this to actual objects to prevent rotating
         T+=delta;
         if (steps)
             stop();
@@ -137,7 +138,9 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     if (type == "Body")
                     {
                         auto R = elem->get_attribute("radius")->get_value();
-                        double r = atof(R.c_str())/AU;
+                        double r = atof(R.c_str());
+                        double scale = r/70000;
+                        r /= AU;
 
                         double low = 0.09;
                         double high = 0.1;
@@ -147,11 +150,11 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
                         if (r < low_threshold)
                         {
-                            r = low_threshold;
+                            r = low_threshold*scale;
                         }
                         else if (r > high_threshold)
                         {
-                            r = high_threshold;
+                            r = high_threshold*scale;
                         }
 
                         Body* body = new Body(r, tex);

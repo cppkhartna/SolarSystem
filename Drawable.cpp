@@ -4,7 +4,7 @@ void Drawable::Draw()
 {
     glPushMatrix();
 
-    glTranslated(position.X(), position.Y(), position.Z());	
+    glTranslated(position.X(), position.Z(), position.Y());	
 
     angle += w;
 

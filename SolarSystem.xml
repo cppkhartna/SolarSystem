@@ -1,6 +1,6 @@
 <SolarSystem>
     <CelestialBody name="Sun">
-        <Body radius="696000.0" texture="Textures/Planets/sun.bmp" />
+        <Body radius="69600.0" texture="Textures/Planets/sun.bmp" />
     </CelestialBody>
     <SolSysBody name="Mercury"    
         a =  "0.387099" e = "0.205634" M0 = "174.7947" n = "149472.6738"
