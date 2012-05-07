@@ -8,7 +8,11 @@ GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 SolarSystem ss;
 double xpos = 100.0f, ypos, zpos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
 double scale = 31.25f;
+#define ENTER 13
 #define ESCAPE 27
+#define SPACEBAR 32
+bool move = true;
+bool step = true;
 
 void init(int width, int height)
 {
@@ -23,7 +27,8 @@ void init(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	
 
-    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.0f,100000.0f);
+    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.0f,1000.0f);
+    glTranslatef(0.0f,0.0f,-500.0f); //center of our shiny little universe
 
     glMatrixMode(GL_MODELVIEW);
 
@@ -82,6 +87,12 @@ void keyPressed(unsigned char key, int x, int y)
         case ESCAPE: 
             exit(1);
             break;
+        case SPACEBAR: 
+            ss.step();
+            break;
+        case ENTER: 
+            ss.move();
+            break;
         case '-': 
             scale /= 2;
             std::cout << scale << std::endl;
@@ -89,6 +100,12 @@ void keyPressed(unsigned char key, int x, int y)
         case '+': case '=': 
             scale *= 2;
             std::cout << scale << std::endl;
+            break;
+        case '(': 
+            ss.slowDown();
+            break;
+        case ')': 
+            ss.speedUp();
             break;
     }
 }

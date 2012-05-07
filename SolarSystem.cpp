@@ -4,6 +4,8 @@ SolarSystem::SolarSystem()
     delta = (1.0/365.0/100.0);
     delta_delta = 10;
 
+    move();
+
     solarTypes.insert("CelestialBody");
     solarTypes.insert("SolSysBody");
     solarTypes.insert("Comet");
@@ -23,7 +25,12 @@ void SolarSystem::addBody(CelestialBody *p)
 
 void SolarSystem::nextFrame()
 {
-    T+=delta;
+    if (moves || (!moves && steps))
+    {
+        T+=delta;
+        if (steps)
+            stop();
+    }
 
     std::list< CelestialBody* >::iterator it;
     for (it = Bodies.begin(); it != Bodies.end(); ++it)
@@ -41,6 +48,24 @@ void SolarSystem::speedUp()
 void SolarSystem::slowDown()
 {
     delta /= delta_delta;
+}
+
+void SolarSystem::move()
+{
+    moves = true;
+    steps = false;
+}
+
+void SolarSystem::step()
+{
+    moves = false;
+    steps = true;
+}
+
+void SolarSystem::stop()
+{
+    moves = false;
+    steps = false;
 }
 
 void SolarSystem::readXML(string filename)

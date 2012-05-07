@@ -16,6 +16,9 @@ public:
     void addBody(CelestialBody *p);
     void speedUp();
     void slowDown();
+    void move();
+    void step();
+    void stop();
 
 private:
     /* data */
@@ -26,5 +29,6 @@ private:
     double T; //time
     double delta;
     double delta_delta;
+    bool moves, steps;
 };
 
