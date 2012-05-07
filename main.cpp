@@ -6,7 +6,13 @@ GLfloat LightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 SolarSystem ss;
-double xpos = 100.0f, ypos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
+
+int mouse_x = 0,mouse_y = 0,mouse_button = -1,mouse_state = GLUT_UP;
+
+double x_angle = 30; // Угол поворота объектов
+double y_angle = 0;
+
+double xpos = 100.0f, ypos, xrot, yrot, xspeed, yspeed;
 double scale = 31.25f;
 double zFar = 10000;
 #define ENTER 13
@@ -49,14 +55,13 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
     glLoadIdentity();		
 
+    glTranslatef(0.0f,0.0f,-xpos);
     glRotatef(360.0f-yrot, 0.0f, 1.0f, 0.0f);
-    glRotatef(lookupdown, 1.0f, 0.0f, 0.0f);
 
-    glTranslatef(0.0f,0.0f,-xpos); 
+    glRotated(x_angle,1,0,0);
+    glRotated(y_angle,0,0,1);
+
     glScalef(scale, scale, scale);
-
-    //glRotatef(xrot,1.0f,0.0f,0.0f);
-    //glRotatef(yrot,0.0f,1.0f,0.0f);
 
     ss.nextFrame();
     glFlush();
@@ -86,6 +91,7 @@ void keyPressed(unsigned char key, int x, int y)
     switch (key) 
     {    
         case ESCAPE: 
+            glutDestroyWindow(glutGetWindow());
             exit(1);
             break;
         case SPACEBAR: 
@@ -116,13 +122,6 @@ void specialKeyPressed(int key, int x, int y)
 
     switch (key) 
     {    
-        case GLUT_KEY_PAGE_UP: 
-            lookupdown -= 1.0f;
-            break;
-
-        case GLUT_KEY_PAGE_DOWN:
-            lookupdown += 1.0f;
-            break;
         case GLUT_KEY_UP: 
             xpos -= 0.5f;
             break;
@@ -144,6 +143,41 @@ void specialKeyPressed(int key, int x, int y)
             break;
     }	
 }
+
+void mouseClick(int button,int state,int x,int y)
+{
+    mouse_button = button;
+    mouse_state = state;
+    mouse_x = x;
+    mouse_y = y;
+}
+
+void mouseMotion(int x,int y)
+{
+    int dx = x - mouse_x;
+    int dy = y - mouse_y;
+    if(mouse_state == GLUT_DOWN)
+    {
+        if(mouse_button == GLUT_LEFT_BUTTON)
+        {
+            y_angle += dx/3;
+            if(y_angle < 0)
+                y_angle += 360;
+            if(y_angle >= 360)
+                y_angle -= 360;
+            x_angle += dy/3;
+            if(x_angle < 5)
+                x_angle = 10;
+            if(x_angle > 90)
+                x_angle = 90;
+            //display();
+        }
+    }
+    mouse_x = x;
+    mouse_y = y;
+}
+
+
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);  
@@ -151,6 +185,8 @@ int main(int argc, char *argv[])
     glutInitWindowSize(640, 480);  
     glutInitWindowPosition(0, 0);  
     glutCreateWindow("SolarSystem");  
+    glutMouseFunc(mouseClick);
+    glutMotionFunc(mouseMotion);
     glutDisplayFunc(display);  
     glutFullScreen();
     glutIdleFunc(&idle); 
