@@ -11,6 +11,7 @@ public:
     void remove();
     void nextFrame(double T);
     virtual Vector getPos(double T);
+    virtual double getA();
 
 private:
     /* data */

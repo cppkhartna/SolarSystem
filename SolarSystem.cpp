@@ -1,7 +1,7 @@
 #include "SolarSystem.h"
 SolarSystem::SolarSystem()
 {
-    delta = 1.0f/6000.0f;
+    delta = (1.0/365.0/100.0);
     delta_delta = 10;
 
     solarTypes.insert("CelestialBody");
@@ -112,7 +112,25 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     if (type == "Body")
                     {
                         auto R = elem->get_attribute("radius")->get_value();
-                        Body* body = new Body(atof(R.c_str()), tex);
+                        double r = atof(R.c_str())/AU;
+
+                        double low = 0.09;
+                        double high = 0.1;
+                        double a = p->getA();
+                        double low_threshold = low*a;
+                        double high_threshold = high*a;
+
+                        if (r < low_threshold)
+                        {
+                            r = low_threshold;
+                        }
+                        else if (r > high_threshold)
+                        {
+                            r = high_threshold;
+                        }
+
+                        Body* body = new Body(r, tex);
+                        std::cout << r << std::endl;
                         p->add(body);
                     }
                 }

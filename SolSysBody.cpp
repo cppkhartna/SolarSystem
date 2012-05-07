@@ -105,3 +105,8 @@ Vector Satellite::getPos(double T)
         return Vector();
     }
 }
+
+double SolSysBody::getA()
+{
+    return a;
+}

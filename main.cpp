@@ -6,24 +6,27 @@ GLfloat LightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 SolarSystem ss;
+double xpos = 100.0f, ypos, zpos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
+double scale = 31.25f;
+#define ESCAPE 27
 
 void init(int width, int height)
 {
-	glEnable(GL_TEXTURE_2D);		
+    glEnable(GL_TEXTURE_2D);		
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  	glClearDepth(1.0);			
-  	glDepthFunc(GL_LESS);	
-  	glEnable(GL_DEPTH_TEST);
-  	glShadeModel(GL_SMOOTH);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearDepth(1.0);			
+    glDepthFunc(GL_LESS);	
+    glEnable(GL_DEPTH_TEST);
+    glShadeModel(GL_SMOOTH);
 
-  	glMatrixMode(GL_PROJECTION);
-  	glLoadIdentity();	
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	
 
-  	gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
+    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.0f,100000.0f);
 
-  	glMatrixMode(GL_MODELVIEW);
-  
+    glMatrixMode(GL_MODELVIEW);
+
     glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);  	// add lighting. (ambient)
     glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);  	// add lighting. (diffuse).
     glLightfv(GL_LIGHT1, GL_POSITION,LightPosition); 	// set light position.
@@ -40,13 +43,17 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
     glLoadIdentity();		
 
-    glTranslatef(0.0f,0.0f,-10.0f); 
-    
+    glRotatef(360.0f-yrot, 0.0f, 1.0f, 0.0f);
+    glRotatef(lookupdown, 1.0f, 0.0f, 0.0f);
+
+    glTranslatef(0.0f,0.0f,-xpos); 
+    glScalef(scale, scale, scale);
+
     //glRotatef(xrot,1.0f,0.0f,0.0f);
     //glRotatef(yrot,0.0f,1.0f,0.0f);
 
     ss.nextFrame();
-	glFlush();
+    glFlush();
     glutSwapBuffers();
 }
 void idle()
@@ -68,9 +75,58 @@ void reshape(int width, int height)
 }
 void keyPressed(unsigned char key, int x, int y) 
 {
+    usleep(100);
+
+    switch (key) 
+    {    
+        case ESCAPE: 
+            exit(1);
+            break;
+        case '-': 
+            scale /= 2;
+            std::cout << scale << std::endl;
+            break;
+        case '+': case '=': 
+            scale *= 2;
+            std::cout << scale << std::endl;
+            break;
+    }
 }
 void specialKeyPressed(int key, int x, int y) 
 {
+    usleep(100);
+
+    switch (key) 
+    {    
+        case GLUT_KEY_PAGE_UP: 
+            lookupdown -= 0.2f;
+            break;
+
+        case GLUT_KEY_PAGE_DOWN:
+            lookupdown += 1.0f;
+            break;
+        case GLUT_KEY_UP: 
+            xpos -= 0.05f;
+            zpos -= 0.05f;	
+            break;
+
+        case GLUT_KEY_DOWN: 
+            xpos += 0.05f;
+            zpos += 0.05f;	
+            break;
+
+        case GLUT_KEY_LEFT:
+            yrot += 1.5f;
+            break;
+
+        case GLUT_KEY_RIGHT:
+            yrot -= 1.5f;
+            break;
+
+        default:
+            //printf ("Special key %d pressed. No action there yet.\n", key);
+            break;
+    }	
 }
 int main(int argc, char *argv[])
 {
@@ -86,7 +142,8 @@ int main(int argc, char *argv[])
     glutKeyboardFunc(&keyPressed);
     glutSpecialFunc(&specialKeyPressed);
     init(640, 480);
-    //std::cout << "Йоба" << std::endl;
+
+    std::cout << "Йоба" << std::endl;
 
     glutMainLoop();  
 

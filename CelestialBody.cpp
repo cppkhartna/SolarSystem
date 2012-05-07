@@ -37,3 +37,8 @@ Vector CelestialBody::getPos(double T)
 {
     return Vector();
 }
+
+double CelestialBody::getA()
+{
+    return 0.387099;
+}
