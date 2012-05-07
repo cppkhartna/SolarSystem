@@ -8,6 +8,7 @@ GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 SolarSystem ss;
 double xpos = 100.0f, ypos, xrot, yrot, xspeed, yspeed, lookupdown = 0.0;
 double scale = 31.25f;
+double zFar = 10000;
 #define ENTER 13
 #define ESCAPE 27
 #define SPACEBAR 32
@@ -27,8 +28,8 @@ void init(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	
 
-    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.0f,1000.0f);
-    glTranslatef(0.0f,0.0f,-500.0f); //center of our shiny little universe
+    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f, zFar);
+    glTranslatef(0.0f,0.0f, -zFar/2.0f); //center of our shiny little universe
 
     glMatrixMode(GL_MODELVIEW);
 
@@ -75,7 +76,7 @@ void reshape(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 10000.0f);
+    gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, zFar);
     glMatrixMode(GL_MODELVIEW);
 }
 void keyPressed(unsigned char key, int x, int y) 

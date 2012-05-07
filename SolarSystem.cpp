@@ -140,6 +140,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                         auto R = elem->get_attribute("radius")->get_value();
                         double r = atof(R.c_str());
                         double scale = r/70000;
+                        //TODO: proportions that depend on data
                         r /= AU;
 
                         double low = 0.09;
@@ -158,7 +159,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                         }
 
                         Body* body = new Body(r, tex);
-                        std::cout << r << std::endl;
+                        //std::cout << r << std::endl;
                         p->add(body);
                     }
                 }
