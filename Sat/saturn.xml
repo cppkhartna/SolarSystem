@@ -1,0 +1,55 @@
+<Satellite name="Mimas"
+   a="0.620125805077" e="0.0196" M0="14.848" n="13952348.9226"
+   O="0.942" i="1.574" w="332.499" >
+   <Body radius="198.2" texture="Textures/Satellites/mimas.bmp" />
+</Satellite>
+<Satellite name="Enceladus"
+   a="0.795606243927" e="0.0" M0="199.686" n="9596282.56715"
+   O="1.37" i="0.003" w="0.076" >
+   <Body radius="252.1" texture="Textures/Satellites/enceladus.bmp" />
+</Satellite>
+<Satellite name="Tethys"
+   a="0.984880328306" e="0.0001" M0="243.367" n="6965241.19562"
+   O="1.888" i="1.091" w="45.202" >
+   <Body radius="533.0" texture="Textures/Satellites/tethys.bmp" />
+</Satellite>
+<Satellite name="Dione"
+   a="1.26143172445" e="0.0022" M0="322.232" n="4804313.34382"
+   O="2.737" i="0.028" w="284.315" >
+   <Body radius="561.7" texture="Textures/Satellites/dione.bmp" />
+</Satellite>
+<Satellite name="Rhea"
+   a="1.76161598279" e="0.0002" M0="179.781" n="2910678.9265"
+   O="4.518" i="0.333" w="241.619" >
+   <Body radius="764.3" texture="Textures/Satellites/rhea.bmp" />
+</Satellite>
+<Satellite name="Titan"
+   a="4.08383152232" e="0.0288" M0="163.31" n="824624.03379"
+   O="15.95" i="0.306" w="180.532" >
+   <Body radius="2574.73" texture="Textures/Satellites/titan.bmp" />
+</Satellite>
+<Satellite name="Hyperion"
+   a="5.0165587019" e="0.0232" M0="86.342" n="618001.184708"
+   O="21.28" i="0.615" w="303.178" >
+   <Body radius="135.0" texture="Textures/Satellites/hyperion.bmp" />
+</Satellite>
+<Satellite name="Iapetus"
+   a="11.9014193971" e="0.0293" M0="201.789" n="165748.31694"
+   O="79.33" i="8.298" w="271.606" >
+   <Body radius="735.6" texture="Textures/Satellites/iapetus.bmp" />
+</Satellite>
+<Satellite name="Phoebe"
+   a="43.2757429641" e="0.1634" M0="53.038" n="23993.688885"
+   O="548.02" i="175.243" w="342.5" >
+   <Body radius="106.5" texture="Textures/Satellites/phoebe.bmp" />
+</Satellite>
+<Satellite name="Janus"
+   a="0.506190359864" e="0.0098" M0="17.342" n="18932483.6012"
+   O="0.695" i="0.165" w="16.012" >
+   <Body radius="89.5" texture="Textures/Satellites/janus.bmp" />
+</Satellite>
+<Satellite name="Epimetheus"
+   a="0.506190359864" e="0.0161" M0="80.377" n="18923528.2666"
+   O="0.695" i="0.353" w="88.975" >
+   <Body radius="58.1" texture="Textures/Satellites/epimetheus.bmp" />
+</Satellite>

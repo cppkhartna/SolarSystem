@@ -1,0 +1,25 @@
+<Satellite name="Ariel"
+   a="0.446630688601" e="0.0012" M0="39.481" n="5217072.4048"
+   O="2.52" i="0.041" w="115.349" >
+   <Body radius="578.9" texture="Textures/Satellites/ariel.bmp" />
+</Satellite>
+<Satellite name="Umbriel"
+   a="0.622335061121" e="0.0039" M0="12.469" n="3172886.13055"
+   O="4.144" i="0.128" w="84.709" >
+   <Body radius="584.7" texture="Textures/Satellites/umbriel.bmp" />
+</Satellite>
+<Satellite name="Titania"
+   a="1.02076987657" e="0.0011" M0="24.614" n="1510360.78352"
+   O="8.706" i="0.079" w="284.4" >
+   <Body radius="788.9" texture="Textures/Satellites/titania.bmp" />
+</Satellite>
+<Satellite name="Oberon"
+   a="1.36515980513" e="0.0014" M0="283.088" n="976659.82842"
+   O="13.46" i="0.068" w="104.4" >
+   <Body radius="761.46" texture="Textures/Satellites/oberon.bmp" />
+</Satellite>
+<Satellite name="Miranda"
+   a="0.303914753532" e="0.0013" M0="311.33" n="9302576.26884"
+   O="1.413" i="4.338" w="68.312" >
+   <Body radius="235.8" texture="Textures/Satellites/miranda.bmp" />
+</Satellite>

@@ -26,7 +26,7 @@ void CelestialBody::remove()
 void CelestialBody::nextFrame(double T)
 {
     Vector pos = getPos(T);
-    std::cout << name << ": " << pos << std::endl;
+    //std::cout << name << ": " << pos << std::endl;
     std::list< Drawable* >::iterator it;
     for (it = seq.begin(); it != seq.end(); ++it)
     {

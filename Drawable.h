@@ -4,7 +4,7 @@
 class Drawable
 {
 public:
-    Drawable (): axis(1, 1, 1), position(0, 0, 0), incl(272.76, 67.16, 0), scale(1), angle(0.0f), w(0.2) {};
+    Drawable (): axis(1, 1, 1), position(0, 0, 0), incl(0, 0, 0), scale(1), angle(0.0f), w(0) {};
     virtual ~Drawable (){};
     void Draw();
     virtual void DrawObject(){};

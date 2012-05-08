@@ -4,7 +4,10 @@ from mechanize import Browser
 from BeautifulSoup import BeautifulSoup
 
 AU = 149597870.691
-c = 200
+jupiter = 200
+saturn = 500
+uranus = 350
+c = uranus
 
 class Satellite:
     def __init__(self, name, a, e, M0, n, O, i, w, rad):
@@ -16,8 +19,7 @@ class Satellite:
         print "<Satellite name=\""+self.name+"\""
         print "   a=\""+self.a+"\" e=\""+self.e+"\" M0=\""+self.M0+"\" n=\""+self.n+"\""
         print "   O=\""+self.O+"\" i=\""+self.i+"\" w=\""+self.w+"\" >"
-        print "   <Body radius=\""+self.rad+"\" texture=\"Textures/Satellites/moon.bmp\" />"
-        #print "   <Body radius=\"1737.10\" texture=\"Textures/Satellites/"+self.name+".bmp\" />"
+        print "   <Body radius=\""+self.rad+"\" texture=\"Textures/Satellites/"+self.name.lower()+".bmp\" />"
         print "</Satellite>"
 
 
@@ -51,11 +53,14 @@ def Parse(data):
         i = str(float(data[j][5]))
         n = str(float(data[j][7])*36525)
         O = str(float(data[j][8]))
-        rad = str(float(data[j][14]))
+        #rad = str(float(data[j][14])) # other
+        rad = str(float(data[j][11])) # uranus
         sat = Satellite(name, a, e, M0, n, O, i, w, rad)
         sat.serialize()
 
-url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/jupiter.html"
+#url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/jupiter.html"
+#url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/saturn.html"
+url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/uranus.html"
 data = Retrieve(url)
 Parse(data)
 

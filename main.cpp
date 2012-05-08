@@ -25,7 +25,7 @@ void init(int width, int height)
 {
     glEnable(GL_TEXTURE_2D);		
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.00f, 0.00f, 0.1f, 0.0f);
     glClearDepth(1.0);			
     glDepthFunc(GL_LESS);	
     glEnable(GL_DEPTH_TEST);
