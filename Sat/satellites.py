@@ -4,19 +4,19 @@ from mechanize import Browser
 from BeautifulSoup import BeautifulSoup
 
 AU = 149597870.691
-c = 500
+c = 200
 
 class Satellite:
-    def __init__(self, name, a, e, M0, n, O, i, w):
-        self.name, self.a, self.e, self.M0, self.n, self.O, self.i, self.w =  name, a, e, M0, n, O, i, w
+    def __init__(self, name, a, e, M0, n, O, i, w, rad):
+        self.name, self.a, self.e, self.M0, self.n, self.O, self.i, self.w, self.rad =  name, a, e, M0, n, O, i, w, rad
     def __repr__(self):
         return repr((self.name, self.a, self.e, self.M0, self.n, self.O,
-                self.i, self.w)) 
+                self.i, self.w, self.rad)) 
     def serialize(self):
         print "<Satellite name=\""+self.name+"\""
         print "   a=\""+self.a+"\" e=\""+self.e+"\" M0=\""+self.M0+"\" n=\""+self.n+"\""
         print "   O=\""+self.O+"\" i=\""+self.i+"\" w=\""+self.w+"\" >"
-        print "   <Body radius=\"1737.10\" texture=\"Textures/Satellites/moon.bmp\" />"
+        print "   <Body radius=\""+self.rad+"\" texture=\"Textures/Satellites/moon.bmp\" />"
         #print "   <Body radius=\"1737.10\" texture=\"Textures/Satellites/"+self.name+".bmp\" />"
         print "</Satellite>"
 
@@ -51,10 +51,11 @@ def Parse(data):
         i = str(float(data[j][5]))
         n = str(float(data[j][7])*36525)
         O = str(float(data[j][8]))
-        sat = Satellite(name, a, e, M0, n, O, i, w)
+        rad = str(float(data[j][14]))
+        sat = Satellite(name, a, e, M0, n, O, i, w, rad)
         sat.serialize()
 
-url = "file:///home/cppkhartna/Projects/APCe/Sat/jupiter.html"
+url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/jupiter.html"
 data = Retrieve(url)
 Parse(data)
 
