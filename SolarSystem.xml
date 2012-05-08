@@ -31,11 +31,13 @@
         a =  "9.582018" e = "0.055723" M0 = "320.3477" n  =  "1213.8664"
         O = "113.6427"  i = "2.4852"   w  =  "89.6567" >
         <Body radius="60000.0" texture="Textures/Planets/saturn.bmp" />
+        <Rings r1="67000.0" r2="480000.0" texture="Textures/Planets/saturn-rings.bmp" />
     </SolSysBody>
     <SolSysBody name="Uranus"    
         a = "19.229412" e = "0.044406" M0 = "142.9559" n  =   "426.9282"
         O =  "73.9893"  i = "0.7726"   w  = "170.5310" >
         <Body radius="25400.0" texture="Textures/Planets/uranus.bmp" />
+        <Rings r1="32000.0" r2="103000.0" texture="Textures/Planets/uranus-rings.bmp" />
     </SolSysBody>
     <SolSysBody name="Neptune"    
         a = "30.103658" e = "0.011214" M0 = "267.7649" n  =   "217.9599"

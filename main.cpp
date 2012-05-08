@@ -7,13 +7,13 @@ GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 SolarSystem ss;
 
-int mouse_x = 0,mouse_y = 0,mouse_button = -1,mouse_state = GLUT_UP;
+int mouse_x = 0, mouse_y = 0, mouse_button = -1, mouse_state = GLUT_UP;
 
-double x_angle = 30; // Угол поворота объектов
+double x_angle = 0; // Угол поворота объектов
 double y_angle = 0;
 
 double xpos = 100.0f, ypos, xrot, yrot, xspeed, yspeed;
-double scale = 31.25f;
+double scale = 3.125f;
 double zFar = 10000;
 #define ENTER 13
 #define ESCAPE 27
@@ -50,27 +50,33 @@ void init(int width, int height)
     ss.readXML("SolarSystem.xml");
 
 }
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
     glLoadIdentity();		
 
-    glTranslatef(0.0f,0.0f,-xpos);
+    glMatrixMode(GL_MODELVIEW);
+
     glRotatef(360.0f-yrot, 0.0f, 1.0f, 0.0f);
 
     glRotated(x_angle,1,0,0);
     glRotated(y_angle,0,0,1);
 
+    glTranslatef(0.0f,0.0f,-xpos);
     glScalef(scale, scale, scale);
 
     ss.nextFrame();
+
     glFlush();
     glutSwapBuffers();
 }
+
 void idle()
 {
     display();
 }
+
 void reshape(int width, int height)
 {
     if (height == 0)	
@@ -84,6 +90,7 @@ void reshape(int width, int height)
     gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, zFar);
     glMatrixMode(GL_MODELVIEW);
 }
+
 void keyPressed(unsigned char key, int x, int y) 
 {
     usleep(100);
@@ -116,6 +123,7 @@ void keyPressed(unsigned char key, int x, int y)
             break;
     }
 }
+
 void specialKeyPressed(int key, int x, int y) 
 {
     usleep(100);
@@ -176,7 +184,6 @@ void mouseMotion(int x,int y)
     mouse_x = x;
     mouse_y = y;
 }
-
 
 int main(int argc, char *argv[])
 {

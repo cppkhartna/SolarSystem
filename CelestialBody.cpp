@@ -27,6 +27,7 @@ void CelestialBody::nextFrame(double T)
 {
     Vector pos = getPos(T);
     std::list< Drawable* >::iterator it;
+    //std::cout << name << ": " << pos << std::endl;
     for (it = seq.begin(); it != seq.end(); ++it)
     {
         (*it)->setPos(pos);

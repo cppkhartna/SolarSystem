@@ -12,6 +12,7 @@ public:
     void nextFrame(double T);
     virtual Vector getPos(double T);
     virtual double getA();
+    std::string name;
 
 private:
     /* data */

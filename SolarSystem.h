@@ -4,6 +4,8 @@
 #include <libxml++/libxml++.h>
 #include <set>
 
+#define TIME_1970_2000 946684800
+
 using namespace std;
 class SolarSystem
 {
@@ -32,3 +34,4 @@ private:
     bool moves, steps;
 };
 
+double scaleR(double r, CelestialBody* p);

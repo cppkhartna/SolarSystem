@@ -1,6 +1,6 @@
 #include "SolSysBody.h"
 
-SolSysBody::SolSysBody (double a, double e, double M0, double n, double O, double i, double w): a(a), e(e), M0(M0), O(O), i(i), w(w), n(n) {};
+SolSysBody::SolSysBody (double a, double e, double M0, double n, double O, double i, double w): a(a), e(e), M0(M0), O(O), i(i), w(w), n(n), T_last(0) {};
 
 Vector SolSysBody::State(double T)
 {
@@ -78,6 +78,8 @@ Vector SolSysBody::setPos(Vector vec)
 
 Vector SolSysBody::getPos(double T)
 {
+    std::cout << T << std::endl;
+    std::cout << T_last << std::endl;
     if (T - T_last < eps_mach)
     {
         return pos;

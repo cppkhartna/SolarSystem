@@ -4,9 +4,9 @@ void Drawable::Draw()
 {
     glPushMatrix();
 
-    glTranslated(position.X(), position.Z(), position.Y());	
+    glTranslated(position.X(), position.Y(), position.Z());	
 
-    angle += w;
+    //angle += w; //TODO: independent realisation
 
     glRotated(incl.X(), axis.X(), 0, 0);
     glRotated(incl.Y(), 0, axis.Y(), 0);
