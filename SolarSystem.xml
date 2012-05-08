@@ -168,5 +168,10 @@
         a = "39.264230" e = "0.244672" M0 =  "15.0233" n  =   "146.3183"
         O = "110.2867"  i = "17.1514"  w =  "224.0499" >
         <Body radius="1500.0" texture="Textures/Planets/pluto.bmp" />
+        <Satellite name="Charon"
+            a="1.05498827805" e="0.0022" M0="147.848" n="2058638.28902"
+            O="6.387" i="0.001" w="71.255" >
+            <Body radius="603.6" texture="Textures/Satellites/charon.bmp" />
+        </Satellite>
     </SolSysBody>
 </SolarSystem>

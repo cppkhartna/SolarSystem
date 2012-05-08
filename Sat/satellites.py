@@ -7,7 +7,8 @@ AU = 149597870.691
 jupiter = 200
 saturn = 500
 uranus = 350
-c = uranus
+pluto = 9000
+c = pluto
 
 class Satellite:
     def __init__(self, name, a, e, M0, n, O, i, w, rad):
@@ -60,7 +61,8 @@ def Parse(data):
 
 #url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/jupiter.html"
 #url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/saturn.html"
-url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/uranus.html"
+#url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/uranus.html"
+url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/pluto.html"
 data = Retrieve(url)
 Parse(data)
 

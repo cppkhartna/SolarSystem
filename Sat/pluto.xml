@@ -1,0 +1,5 @@
+<Satellite name="Charon"
+   a="1.05498827805" e="0.0022" M0="147.848" n="2058638.28902"
+   O="6.387" i="0.001" w="71.255" >
+   <Body radius="603.6" texture="Textures/Satellites/charon.bmp" />
+</Satellite>
