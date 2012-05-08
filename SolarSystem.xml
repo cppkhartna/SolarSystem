@@ -1,7 +1,7 @@
 <SolarSystem>
-    <!--<CelestialBody name="Sun">-->
-        <!--<Body radius="69600.0" texture="Textures/Planets/sun.bmp" />-->
-    <!--</CelestialBody>-->
+    <CelestialBody name="Sun">
+        <Body radius="696000.0" texture="Textures/Planets/sun.bmp" />
+    </CelestialBody>
     <SolSysBody name="Mercury"    
         a =  "0.387099" e = "0.205634" M0 = "174.7947" n = "149472.6738"
         O =  "48.331"   i = "7.0048"   w  =  "77.4552" >
@@ -17,15 +17,25 @@
         O = "174.876"   i = "0.0000"   w  = "102.9400" >
         <Body radius="6378.14" texture="Textures/Planets/earth.bmp" />
         <Satellite name="Moon"
-            a="0.00257"  e="0.0554"  M0="135.27" n="125.08"   
+            a="0.125"  e="0.0554"  M0="135.27" n="481266.47"   
             O="13.176358" i="5.16"  w="318.15" >
-            <Body radius="1737.10" texture="Textures/Planets/earth.bmp" />
+            <Body radius="1737.10" texture="Textures/Satellites/moon.bmp" />
         </Satellite>
     </SolSysBody>
     <SolSysBody name="Mars"    
         a =  "1.523692" e = "0.093405" M0 =  "19.3879" n  = "19140.3023"
         O =  "49.557"   i = "1.8496"   w  = "336.0590" >
         <Body radius="3393.4" texture="Textures/Planets/mars.bmp" />
+        <Satellite name="Phobos"  
+            a="0.0813"   e="0.0151"  M0="91.059"  n="41231054.74"
+            O="0.3189" i="1.075" w="150.057" > 
+            <Body radius="444" texture="Textures/Satellites/phobos.bmp" />
+        </Satellite>
+        <Satellite name="Deimos"  
+            a="0.0884"  e="0.0002"  M0="325.329" n="10415537.63"
+            O="1.2624" i="1.788" w="260.729" >
+            <Body radius="252" texture="Textures/Satellites/deimos.bmp" />
+        </Satellite>
     </SolSysBody>
     <SolSysBody name="Jupiter"    
         a =  "5.204267" e = "0.048775" M0 =  "18.8185" n  =  "3033.6272"

@@ -76,11 +76,6 @@ Vector SolSysBody::setPos(Vector vec)
     return pos;
 }
 
-//Vector Satellite::setPos(Vector vec)
-//{
-    //return SolSysBody::setPos(vec*getScale());
-//}
-
 Vector SolSysBody::getPos(double T)
 {
     if (T - T_last < eps_mach)
@@ -103,7 +98,8 @@ Vector Satellite::getPos(double T)
 {
     if (planet != NULL)
     {
-        return setPos(planet->getPos(T) + getScale()*State(T));
+        //std::cout << "Moon: " << State(T) << std::endl;
+        return setPos(planet->getPos(T) + State(T));
     }
     else 
     {

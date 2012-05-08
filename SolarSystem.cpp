@@ -184,14 +184,14 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
 double scaleR(double r, CelestialBody* p)
 {
-    //TODO: add factor/scale to CelBody
     double a = p->getA();
     double scale;
-    if (a < 4)
+    if (r < 7000)
         scale = r/7000;
-    else
+    else if (r < 80000)
         scale = r/70000;
-    //TODO: proportions that depend on data
+    else
+        scale = r/100000;
     r /= AU; //useless
 
     double high = 0.08;
