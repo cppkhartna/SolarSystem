@@ -1,12 +1,11 @@
 #include "SolarSystem.h"
 SolarSystem::SolarSystem()
 {
-    delta = (1.0/365.0/100.0);
+    delta = (1.0/365.0/100.0); // 1 day
     delta_delta = 10;
 
     // Time elapsed since J2000
     T = (time(NULL) - TIME_1970_2000)/365.25/24.0/3600.0/100.0; 
-    std::cout << T << std::endl;
 
     move();
 
@@ -133,6 +132,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     {
                         Satellite* satBody = new Satellite(orb[0], orb[1], orb[2], orb[3], orb[4], orb[5], orb[6]);
                         satBody->setPlanet(dynamic_cast<SolSysBody*>(p));
+                        satBody->name = name;
                         addBody(satBody);
                         parseXML(*i, satBody);
                     }
@@ -153,7 +153,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
                         Body* body = new Body(r, tex);
                         //std::cout << r << std::endl;
-                        //std::cout << p->name << " " << p << std::endl;
+                        std::cout << p->name << " " << r << std::endl;
                         p->add(body);
                     }
                     if (!type.compare("Rings"))
@@ -184,24 +184,20 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
 double scaleR(double r, CelestialBody* p)
 {
-    double scale = r/70000;
-    //TODO: proportions that depend on data
-    r /= AU;
-
-    double low = 0.09;
-    double high = 0.1;
+    //TODO: add factor/scale to CelBody
     double a = p->getA();
-    double low_threshold = low*a;
+    double scale;
+    if (a < 4)
+        scale = r/7000;
+    else
+        scale = r/70000;
+    //TODO: proportions that depend on data
+    r /= AU; //useless
+
+    double high = 0.08;
+    //double a = 1;
     double high_threshold = high*a;
+    p->setScale(high_threshold);
 
-    if (r < low_threshold)
-    {
-        r = low_threshold*scale;
-    }
-    else if (r > high_threshold)
-    {
-        r = high_threshold*scale;
-    }
-
-    return r;
+    return scale;
 }

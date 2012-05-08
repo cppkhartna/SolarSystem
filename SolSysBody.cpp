@@ -76,10 +76,13 @@ Vector SolSysBody::setPos(Vector vec)
     return pos;
 }
 
+//Vector Satellite::setPos(Vector vec)
+//{
+    //return SolSysBody::setPos(vec*getScale());
+//}
+
 Vector SolSysBody::getPos(double T)
 {
-    std::cout << T << std::endl;
-    std::cout << T_last << std::endl;
     if (T - T_last < eps_mach)
     {
         return pos;
@@ -100,7 +103,7 @@ Vector Satellite::getPos(double T)
 {
     if (planet != NULL)
     {
-        return setPos(planet->getPos(T) + State(T));
+        return setPos(planet->getPos(T) + getScale()*State(T));
     }
     else 
     {
@@ -111,4 +114,9 @@ Vector Satellite::getPos(double T)
 double SolSysBody::getA()
 {
     return a;
+}
+
+double Satellite::getA()
+{
+    return planet->getA();
 }

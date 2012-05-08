@@ -33,6 +33,7 @@ public:
     Satellite (double a, double e, double M0, double n, double O, double i, double w): SolSysBody (a, e, M0, n, O, i, w) {};
     virtual ~Satellite () {};
     virtual Vector getPos(double T);
+    virtual double getA();
     void setPlanet(SolSysBody* planet);
 
 private:

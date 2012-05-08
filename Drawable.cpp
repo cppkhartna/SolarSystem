@@ -16,7 +16,7 @@ void Drawable::Draw()
     glRotated(angle, 0, 1, 1); // rotate around self-z
     glRotated(angle, 1, 0, 1); // rotate around self-z
 
-    glScaled(scale.X(), scale.Y(), scale.Z());
+    glScaled(scale, scale, scale);
 
     DrawObject();
 
@@ -80,3 +80,8 @@ void Drawable::setPos(Vector pos)
 {
     position = pos;
 };
+
+void Drawable::setScale(double scale)
+{
+    this->scale = scale;
+}

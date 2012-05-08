@@ -1,7 +1,7 @@
 <SolarSystem>
-    <CelestialBody name="Sun">
-        <Body radius="69600.0" texture="Textures/Planets/sun.bmp" />
-    </CelestialBody>
+    <!--<CelestialBody name="Sun">-->
+        <!--<Body radius="69600.0" texture="Textures/Planets/sun.bmp" />-->
+    <!--</CelestialBody>-->
     <SolSysBody name="Mercury"    
         a =  "0.387099" e = "0.205634" M0 = "174.7947" n = "149472.6738"
         O =  "48.331"   i = "7.0048"   w  =  "77.4552" >
@@ -16,6 +16,11 @@
         a =  "1.000000" e = "0.016709" M0 = "357.5256" n  = "35999.3720"
         O = "174.876"   i = "0.0000"   w  = "102.9400" >
         <Body radius="6378.14" texture="Textures/Planets/earth.bmp" />
+        <Satellite name="Moon"
+            a="0.00257"  e="0.0554"  M0="135.27" n="125.08"   
+            O="13.176358" i="5.16"  w="318.15" >
+            <Body radius="1737.10" texture="Textures/Planets/earth.bmp" />
+        </Satellite>
     </SolSysBody>
     <SolSysBody name="Mars"    
         a =  "1.523692" e = "0.093405" M0 =  "19.3879" n  = "19140.3023"

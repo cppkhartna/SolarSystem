@@ -27,9 +27,9 @@ void CelestialBody::nextFrame(double T)
 {
     Vector pos = getPos(T);
     std::list< Drawable* >::iterator it;
-    //std::cout << name << ": " << pos << std::endl;
     for (it = seq.begin(); it != seq.end(); ++it)
     {
+        (*it)->setScale(getScale());
         (*it)->setPos(pos);
     }
 }
@@ -42,4 +42,14 @@ Vector CelestialBody::getPos(double T)
 double CelestialBody::getA()
 {
     return 0.387099;
+}
+
+double CelestialBody::getScale() const
+{
+    return scale;
+}
+
+void CelestialBody::setScale(double scale)
+{
+    this->scale = scale;
 }
