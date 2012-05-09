@@ -35,6 +35,7 @@ public:
     virtual Vector getPos(double T);
     virtual double getA();
     void setPlanet(SolSysBody* planet);
+    double getScale() const;
 
 private:
     /* data */

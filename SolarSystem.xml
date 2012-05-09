@@ -108,12 +108,12 @@
             <Body radius="135.0" texture="Textures/Satellites/hyperion.bmp" />
         </Satellite>
         <Satellite name="Iapetus"
-            a="11.9014193971" e="0.0293" M0="201.789" n="165748.31694"
+            a="6.9014193971" e="0.0293" M0="201.789" n="165748.31694"
             O="79.33" i="8.298" w="271.606" >
             <Body radius="735.6" texture="Textures/Satellites/iapetus.bmp" />
         </Satellite>
         <Satellite name="Phoebe"
-            a="43.2757429641" e="0.1634" M0="53.038" n="23993.688885"
+            a="7.32757429641" e="0.1634" M0="53.038" n="23993.688885"
             O="548.02" i="175.243" w="342.5" >
             <Body radius="106.5" texture="Textures/Satellites/phoebe.bmp" />
         </Satellite>
@@ -163,6 +163,16 @@
         a = "30.103658" e = "0.011214" M0 = "267.7649" n  =   "217.9599"
         O = "131.7942"  i = "1.7680"   w  =  "37.4435" >
         <Body radius="24300.0" texture="Textures/Planets/neptune.bmp" />
+        <Satellite name="Triton"
+            a="1.18570872153" e="0.0" M0="352.257" n="2237421.56029"
+            O="5.877" i="156.865" w="66.142" >
+            <Body radius="270.34" texture="Textures/Satellites/triton.bmp" />
+        </Satellite>
+        <Satellite name="Proteus"
+            a="0.393207468317" e="0.0005" M0="250.938" n="11715964.4349"
+            O="1.122" i="0.075" w="67.968" >
+            <Body radius="51.07" texture="Textures/Satellites/proteus.bmp" />
+        </Satellite>
     </SolSysBody>
     <SolSysBody name="Pluto"    
         a = "39.264230" e = "0.244672" M0 =  "15.0233" n  =   "146.3183"

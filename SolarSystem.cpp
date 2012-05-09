@@ -189,9 +189,9 @@ double scaleR(double r, CelestialBody* p)
     if (r < 7000)
         scale = r/7000;
     else if (r < 80000)
-        scale = r/70000;
-    else
         scale = r/100000;
+    else
+        scale = r/200000; //FIXME
     r /= AU; //useless
 
     double high = 0.08;

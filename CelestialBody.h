@@ -12,7 +12,7 @@ public:
     void nextFrame(double T);
     virtual Vector getPos(double T);
     virtual double getA();
-    double getScale() const;
+    virtual double getScale() const;
     void setScale(double scale);
     std::string name;
 

@@ -1,0 +1,10 @@
+<Satellite name="Triton"
+   a="1.18570872153" e="0.0" M0="352.257" n="2237421.56029"
+   O="5.877" i="156.865" w="66.142" >
+   <Body radius="135.34" texture="Textures/Satellites/triton.bmp" />
+</Satellite>
+<Satellite name="Proteus"
+   a="0.393207468317" e="0.0005" M0="250.938" n="11715964.4349"
+   O="1.122" i="0.075" w="67.968" >
+   <Body radius="21.07" texture="Textures/Satellites/proteus.bmp" />
+</Satellite>

@@ -116,3 +116,8 @@ double Satellite::getA()
 {
     return planet->getA();
 }
+
+double Satellite::getScale() const
+{
+    return planet->getScale();
+}

@@ -8,7 +8,8 @@ jupiter = 200
 saturn = 500
 uranus = 350
 pluto = 9000
-c = pluto
+neptune = 500
+c = neptune
 
 class Satellite:
     def __init__(self, name, a, e, M0, n, O, i, w, rad):
@@ -54,15 +55,16 @@ def Parse(data):
         i = str(float(data[j][5]))
         n = str(float(data[j][7])*36525)
         O = str(float(data[j][8]))
-        #rad = str(float(data[j][14])) # other
-        rad = str(float(data[j][11])) # uranus
+        rad = str(float(data[j][14])) # before uranus, neptune
+        #rad = str(float(data[j][11])) # uranus, pluto
         sat = Satellite(name, a, e, M0, n, O, i, w, rad)
         sat.serialize()
 
 #url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/jupiter.html"
 #url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/saturn.html"
 #url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/uranus.html"
-url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/pluto.html"
+#url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/pluto.html"
+url = "file:///home/cppkhartna/Projects/APCe/SolarSystem/Sat/neptune.html"
 data = Retrieve(url)
 Parse(data)
 
