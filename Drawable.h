@@ -43,3 +43,17 @@ private:
     double R1, R2;
     GLuint texture;
 };
+
+class Text: public Drawable
+{
+public:
+    Text(GLuint texture);
+    virtual ~Text ();
+    void DrawObject();
+    void setText(std::string new_text);
+private:
+    /* data */
+    std::string text;
+    GLuint texture;
+    GLuint list;
+};

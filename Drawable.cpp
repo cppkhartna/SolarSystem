@@ -2,6 +2,9 @@
 
 void Drawable::Draw()
 {
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
     glPushMatrix();
 
     glTranslated(position.X(), position.Y(), position.Z());	
@@ -21,6 +24,8 @@ void Drawable::Draw()
     DrawObject();
 
     glPopMatrix();
+
+    glDisable(GL_BLEND);
 }
 
 void Body::DrawObject()
@@ -84,4 +89,67 @@ void Drawable::setPos(Vector pos)
 void Drawable::setScale(double scale)
 {
     this->scale = scale;
+}
+
+Text::Text(GLuint texture)
+{
+    this->texture = texture;
+
+    //NegeGL
+    float cx;   
+    float cy;   
+
+    list  = glGenLists( 256 );
+    glBindTexture( GL_TEXTURE_2D, texture);
+
+    for (GLuint i = 0; i < 256; i++)
+    {
+        cx = 1 - ( float )( i % 16 ) / 16.0f;
+        cy = 1 - ( float )( i / 16 ) / 16.0f;
+
+        glNewList( list + ( 255 - i ), GL_COMPILE );
+        glBegin( GL_QUADS );
+            glTexCoord2f( cx - 0.0625, cy );
+            glVertex2i( 0, 0 );
+
+            glTexCoord2f( cx, cy );
+            glVertex2i( 16, 0 );
+
+            glTexCoord2f( cx, cy - 0.0625f );
+            glVertex2i( 16, 16 );
+
+            glTexCoord2f( cx - 0.0625f, cy - 0.0625f);
+            glVertex2i( 0, 16 );
+        glEnd();
+
+        glTranslated( 10, 0, 0 );
+        glEndList();
+    }
+}
+
+void Text::setText(std::string new_text)
+{
+    text = new_text;
+}
+
+Text::~Text()
+{
+    glDeleteLists(list, 256);
+}
+
+void Text::DrawObject()
+{
+    glDisable( GL_DEPTH_TEST );
+    glEnable(GL_BLEND);
+
+    glBindTexture( GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
+
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+    glListBase(list - 32 + ( 128 * 0 ));
+
+    glCallLists(text.length(), GL_BYTE, text.c_str());
+
+    glEnable( GL_DEPTH_TEST );
+    glDisable( GL_BLEND );
 }

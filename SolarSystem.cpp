@@ -17,6 +17,11 @@ SolarSystem::SolarSystem()
     drawTypes.insert("Rings");
 }
 
+void SolarSystem::init()
+{
+    text = new Text(tm.getTexture("Textures/font.bmp"));
+}
+
 SolarSystem::~SolarSystem()
 {
     Bodies.clear();
@@ -189,9 +194,9 @@ double scaleR(double r, CelestialBody* p)
     if (r < 7000)
         scale = r/7000;
     else if (r < 80000)
-        scale = r/100000;
+        scale = r/70000;
     else
-        scale = r/200000; //FIXME
+        scale = r/100000; //FIXME
     r /= AU; //useless
 
     double high = 0.08;

@@ -8,6 +8,9 @@ GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 SolarSystem ss;
 
 int mouse_x = 0, mouse_y = 0, mouse_button = -1, mouse_state = GLUT_UP;
+int frame=0, Time, timebase=0;
+double fps;
+int width, height;
 
 double x_angle = 0; // Угол поворота объектов
 double y_angle = 0;
@@ -44,9 +47,7 @@ void init(int width, int height)
     glLightfv(GL_LIGHT1, GL_POSITION,LightPosition); 	// set light position.
     glEnable(GL_LIGHT1);                             	// turn light 1 on.
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
+    ss.init();
     ss.readXML("SolarSystem.xml");
 
 }
@@ -65,6 +66,28 @@ void display()
 
     glTranslatef(0.0f,0.0f,-xpos);
     glScalef(scale, scale, scale);
+
+    frame++;
+    Time=glutGet(GLUT_ELAPSED_TIME);
+
+    if (Time - timebase > 1000) 
+    {
+        fps = frame*1000.0/(Time-timebase);
+        timebase = Time;
+        frame = 0;
+    }
+
+
+    std::ostringstream oss;
+    std::string _text = "FPS=";
+    oss << fps;
+    _text += oss.str();
+
+    ss.text->setText(_text);
+    ss.text->setPos(Vector(-width/2, 0, -height/2));
+    ss.text->setScale(1.0/6.0/scale);
+    ss.text->Draw();
+    std::cout << "fps=" << fps << endl;
 
     ss.nextFrame();
 
@@ -93,8 +116,6 @@ void reshape(int width, int height)
 
 void keyPressed(unsigned char key, int x, int y) 
 {
-    usleep(100);
-
     switch (key) 
     {    
         case ESCAPE: 

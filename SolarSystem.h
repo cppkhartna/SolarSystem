@@ -12,6 +12,7 @@ class SolarSystem
 public:
     SolarSystem ();
     virtual ~SolarSystem ();
+    void init();
     void readXML(string filename);
     void parseXML(const xmlpp::Node *node, CelestialBody* p = NULL);
     void nextFrame();
@@ -21,6 +22,7 @@ public:
     void move();
     void step();
     void stop();
+    Text* text;
 
 private:
     /* data */
