@@ -55,27 +55,6 @@ void init(int width, int height)
 
 }
 
-void print(int x, int y, std::string _text)
-{
-    glMatrixMode( GL_PROJECTION );
-    glPushMatrix( );
-    glLoadIdentity( );
-    glOrtho(0,w,0,h,-1,1);         
-    glMatrixMode( GL_MODELVIEW );
-    glPushMatrix( );
-    glLoadIdentity( );
-    glTranslatef(x, y, 0);
-
-    ss.text->setText(_text);
-    ss.text->Draw();
-
-    glMatrixMode( GL_PROJECTION );
-    glPopMatrix();
-
-    glMatrixMode( GL_MODELVIEW );
-    glPopMatrix( );
-}
-
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
@@ -109,7 +88,7 @@ void display()
 
     ss.nextFrame();
 
-    print(10, 10, _text);
+    ss.text->print(10, 10, _text, w, h);
 
     glFlush();
     glutSwapBuffers();

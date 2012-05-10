@@ -52,6 +52,7 @@ public:
     virtual ~Text ();
     void DrawObject();
     void setText(std::string new_text);
+    void print(int x, int y, std::string _text, int W, int H);
 private:
     /* data */
     std::string text;

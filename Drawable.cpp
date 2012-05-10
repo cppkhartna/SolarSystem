@@ -161,3 +161,25 @@ void Text::DrawObject()
     glEnable( GL_DEPTH_TEST );
     glDisable( GL_BLEND );
 }
+
+void Text::print(int x, int y, std::string _text, int W, int H)
+{
+    glMatrixMode( GL_PROJECTION );
+    glPushMatrix( );
+    glLoadIdentity( );
+    glOrtho(0,W,0,H,-1,1);         
+    glMatrixMode( GL_MODELVIEW );
+    glPushMatrix( );
+    glLoadIdentity( );
+    glTranslatef(x, y, 0);
+
+    setText(_text);
+    Draw();
+
+    glMatrixMode( GL_PROJECTION );
+    glPopMatrix();
+
+    glMatrixMode( GL_MODELVIEW );
+    glPopMatrix( );
+}
+
