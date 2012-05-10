@@ -90,6 +90,22 @@ void display()
 
     ss.text->print(10, 10, _text, w, h);
 
+    oss.str("");
+    oss.clear();
+    time_t raw;
+    raw = ss.getTime();
+    oss << ctime(&raw);
+    _text = "Time = ";
+    _text += oss.str();
+    ss.text->print(40, 40, _text, w, h);
+
+    oss.str("");
+    oss.clear();
+    oss << ss.getSpeed();
+    _text = "Delta = ";
+    _text += oss.str();
+    ss.text->print(50, 60, _text, w, h);
+
     glFlush();
     glutSwapBuffers();
 }

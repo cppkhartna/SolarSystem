@@ -1,11 +1,11 @@
 #include "SolarSystem.h"
 SolarSystem::SolarSystem()
 {
-    delta = (1.0/365.0/100.0); // 1 day
-    delta_delta = 10;
+    delta = DAY; // 1 day
+    delta_delta = 2;
 
     // Time elapsed since J2000
-    T = (time(NULL) - TIME_1970_2000)/365.25/24.0/3600.0/100.0; 
+    T = (time(NULL) - TIME_1970_2000)/JEDAY;
 
     move();
 
@@ -58,6 +58,18 @@ void SolarSystem::speedUp()
 void SolarSystem::slowDown()
 {
     delta /= delta_delta;
+}
+
+time_t SolarSystem::getTime()
+{
+    double tt = T*JEDAY+TIME_1970_2000;
+    time_t raw = (int) tt;
+    return raw;
+}
+
+double SolarSystem::getSpeed()
+{
+    return delta/DAY;
 }
 
 void SolarSystem::move()

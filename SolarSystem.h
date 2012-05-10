@@ -5,6 +5,8 @@
 #include <set>
 
 #define TIME_1970_2000 946684800
+#define DAY (1.0/365.0/100.0)
+#define JEDAY (365.25*24.0*3600.0*100.0)
 
 using namespace std;
 class SolarSystem
@@ -23,6 +25,8 @@ public:
     void step();
     void stop();
     Text* text;
+    time_t getTime();
+    double getSpeed();
 
 private:
     /* data */
