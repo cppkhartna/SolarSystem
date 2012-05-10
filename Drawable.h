@@ -42,6 +42,7 @@ private:
     /* data */
     double R1, R2;
     GLuint texture;
+    GLuint list;
 };
 
 class Text: public Drawable

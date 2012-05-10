@@ -53,12 +53,10 @@ Rings::Rings(double R1, double R2, GLuint texture)
     this->R1 = R1;
     this->R2 = R2;
     this->texture = texture;
-}
+    list  = glGenLists( 1 );
+    glBindTexture( GL_TEXTURE_2D, texture);
 
-void Rings::DrawObject()
-{
-    glBindTexture(GL_TEXTURE_2D, texture); 
-    glEnable(GL_TEXTURE_2D);
+    glNewList( list, GL_COMPILE );
     int n = 360;
 
     glBegin(GL_QUADS);
@@ -77,6 +75,16 @@ void Rings::DrawObject()
         glVertex3d(R1*cos(phi2), R1*sin(phi2), 0);
     }
     glEnd();
+
+    glEndList();
+}
+
+void Rings::DrawObject()
+{
+    glBindTexture(GL_TEXTURE_2D, texture); 
+    glEnable(GL_TEXTURE_2D);
+
+    glCallList(list);
 
     glDisable(GL_TEXTURE_2D);
 }

@@ -10,7 +10,7 @@ SolarSystem ss;
 int mouse_x = 0, mouse_y = 0, mouse_button = -1, mouse_state = GLUT_UP;
 int frame=0, Time, timebase=0;
 double fps;
-int width, height;
+int w, h;
 
 double x_angle = 0; // Угол поворота объектов
 double y_angle = 0;
@@ -26,6 +26,9 @@ bool step = true;
 
 void init(int width, int height)
 {
+    w = width;
+    h = height;
+
     glEnable(GL_TEXTURE_2D);		
 
     glClearColor(0.00f, 0.00f, 0.1f, 0.0f);
@@ -83,11 +86,17 @@ void display()
     oss << fps;
     _text += oss.str();
 
-    ss.text->setText(_text);
-    ss.text->setPos(Vector(-width/2, 0, -height/2));
-    ss.text->setScale(1.0/6.0/scale);
-    ss.text->Draw();
+    //glMatrixMode(GL_PROJECTION); 
+    //glPushMatrix();
+    //glLoadIdentity();
+    //glOrtho(0,w,0,h,-1,1);         
+    //glMatrixMode(GL_MODELVIEW);
+    //glTranslatef(-10, -10, 0);
+    //ss.text->setText(_text);
+    //ss.text->setScale(1.0/6.0/scale);
+    //ss.text->Draw();
     std::cout << "fps=" << fps << endl;
+    //glPopMatrix();
 
     ss.nextFrame();
 
@@ -104,6 +113,9 @@ void reshape(int width, int height)
 {
     if (height == 0)	
         height=1;
+
+    w = width;
+    h = height;
 
     glViewport(0, 0, width, height);
 
