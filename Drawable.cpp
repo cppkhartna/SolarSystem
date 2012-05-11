@@ -40,7 +40,7 @@ void Body::DrawObject()
     glBindTexture(GL_TEXTURE_2D, texture); 
     glEnable(GL_TEXTURE_2D);
 
-    gluSphere(sphere,R,360,360);                // Draw A Sphere
+    gluSphere(sphere,R,36,36);                // Draw A Sphere
 
     glDisable(GL_TEXTURE_2D);
 }

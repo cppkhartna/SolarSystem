@@ -193,7 +193,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
                         Rings* rings = new Rings(r[1], r[2], tex);
                         //std::cout << p->name << std::endl;
-                        //p->add(rings);
+                        p->add(rings);
                     }
                 }
             }
