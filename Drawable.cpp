@@ -228,6 +228,7 @@ Tail::Tail(GLuint texture)
 
 void Tail::DrawObject()
 {
+    //TODO: Optimize performance
     static int col = 0;
     col++;
     col = col % 11;

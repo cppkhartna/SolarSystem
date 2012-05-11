@@ -27,6 +27,7 @@ public:
     Text* text;
     time_t getTime();
     double getSpeed();
+    void setFPS(double fps);
 
 private:
     /* data */
@@ -38,6 +39,7 @@ private:
     double delta;
     double delta_delta;
     bool moves, steps;
+    double fps;
 };
 
 double scaleR(double r, CelestialBody* p);

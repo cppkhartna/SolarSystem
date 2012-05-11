@@ -1,6 +1,7 @@
 #include "SolarSystem.h"
 SolarSystem::SolarSystem()
 {
+    fps = 60.0f;
     delta = DAY; // 1 day
     delta_delta = 2;
 
@@ -37,7 +38,7 @@ void SolarSystem::nextFrame()
     if (moves || (!moves && steps))
     {
         //TODO: extend this to actual objects to prevent rotating
-        T+=delta;
+        T+=delta/fps;
         if (steps)
             stop();
     }
@@ -70,6 +71,11 @@ time_t SolarSystem::getTime()
 double SolarSystem::getSpeed()
 {
     return delta/DAY;
+}
+
+void SolarSystem::setFPS(double fps)
+{
+    this->fps = fps;
 }
 
 void SolarSystem::move()

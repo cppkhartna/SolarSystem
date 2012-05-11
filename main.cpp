@@ -85,6 +85,8 @@ void display()
     oss << fps;
     _text += oss.str();
 
+    if (fps > 1)
+        ss.setFPS(fps);
     ss.nextFrame();
 
     ss.text->print(10, 10, _text, w, h);
