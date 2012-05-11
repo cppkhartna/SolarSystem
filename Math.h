@@ -34,6 +34,8 @@ public:
     double Y();
     double Z();
 
+    double norm();
+
     friend class Matrix;
 
 private:

@@ -10,8 +10,10 @@ public:
     void Parab(double GM, double M, double a, double e){};
     void Hyperb(double GM, double M, double a, double e){};
     void addTail(Tail *tail_new);
+    Vector getPos(double T);
 
 private:
     /* data */
     Tail* tail;
+    bool tail_added;
 };

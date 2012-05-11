@@ -110,6 +110,11 @@ double Vector::Z()
     return coords[2];
 };
 
+double Vector::norm()
+{
+    return sqrt(X()*X()+Y()*Y()+Z()*Z());
+};
+
 Matrix::Matrix ()
 {
   for (int i = 0; i < 3; i++)

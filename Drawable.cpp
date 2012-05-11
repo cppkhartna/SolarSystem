@@ -228,7 +228,15 @@ Tail::Tail(GLuint texture)
 
 void Tail::DrawObject()
 {
-    //TODO: Optimize performance
+    static int elapsed = 0;
+    int Time=glutGet(GLUT_ELAPSED_TIME);
+
+    std::cout << Time - elapsed << std::endl;
+    if (Time - elapsed > 6)
+       elapsed = Time;
+    else
+       return;
+
     static int col = 0;
     col++;
     col = col % 11;

@@ -184,4 +184,10 @@
             <Body radius="603.6" texture="Textures/Satellites/charon.bmp" />
         </Satellite>
     </SolSysBody>
+    <!--<Comet name="Halley:1P Halley"-->
+        <!--a="17.834144" e="0.967143" M0="38.384264" n="2133851.87"-->
+        <!--O="111.332485" i="162.262690" w="75.31589"-->
+        <!-->-->
+        <!--<Body radius="760.0" texture="Textures/asteroid.bmp" />-->
+    <!--</Comet>-->
 </SolarSystem>

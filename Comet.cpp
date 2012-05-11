@@ -25,5 +25,24 @@ void Comet::Kepler(double GM, double T0, double T, double q, double e)
 void Comet::addTail(Tail *tail_new)
 {
     tail = tail_new;
-    add(tail);
+    tail_added = false;
+}
+
+Vector Comet::getPos(double T)
+{
+    //TODO: Why so zero?
+    Vector posit = SolSysBody::getPos(T);
+    if (posit.norm() < 1.0f)
+    {
+        if (!tail_added)
+            add(tail);
+        tail_added = true;
+    }
+    else
+    {
+        if (tail_added)
+            remove();
+        tail_added = false;
+    }
+    return posit;
 }
