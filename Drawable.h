@@ -1,5 +1,6 @@
 #include "Math.h"
 #include "main.h"
+#define MAX_PARTICLES   1000
 
 class Drawable
 {
@@ -56,6 +57,30 @@ public:
 private:
     /* data */
     std::string text;
+    GLuint texture;
+    GLuint list;
+};
+
+typedef struct
+{
+    bool active;
+    float life;
+    float fade;
+    Vector color, position, direction, gravity;
+}
+particle;
+
+class Tail: public Drawable
+{
+public:
+    Tail(GLuint texture);
+    virtual ~Tail (){};
+    void DrawObject();
+    void setVel(Vector v){};
+private:
+    /* data */
+    particle particles[MAX_PARTICLES];
+    Vector velocity;
     GLuint texture;
     GLuint list;
 };

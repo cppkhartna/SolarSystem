@@ -9,7 +9,9 @@ public:
     void Kepler(double GM, double T0, double T, double q, double e);
     void Parab(double GM, double M, double a, double e){};
     void Hyperb(double GM, double M, double a, double e){};
+    void addTail(Tail *tail_new);
 
 private:
     /* data */
+    Tail* tail;
 };

@@ -80,7 +80,6 @@ void display()
         frame = 0;
     }
 
-
     std::ostringstream oss;
     std::string _text = "FPS=";
     oss << fps;

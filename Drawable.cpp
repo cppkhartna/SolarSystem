@@ -1,5 +1,12 @@
 #include "Drawable.h"
 
+static GLfloat colors[12][3] =
+{
+    {1.0f,0.5f,0.5f},{1.0f,0.75f,0.5f},{1.0f,1.0f,0.5f},{0.75f,1.0f,0.5f},
+    {0.5f,1.0f,0.5f},{0.5f,1.0f,0.75f},{0.5f,1.0f,1.0f},{0.5f,0.75f,1.0f},
+    {0.5f,0.5f,1.0f},{0.75f,0.5f,1.0f},{1.0f,0.5f,1.0f},{1.0f,0.5f,0.75f}
+};
+
 void Drawable::Draw()
 {
     glEnable(GL_BLEND);
@@ -109,6 +116,7 @@ Text::Text(GLuint texture)
 
     list  = glGenLists( 256 );
     glBindTexture( GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
 
     for (GLuint i = 0; i < 256; i++)
     {
@@ -133,6 +141,7 @@ Text::Text(GLuint texture)
         glTranslated( 10, 0, 0 );
         glEndList();
     }
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Text::setText(std::string new_text)
@@ -158,6 +167,7 @@ void Text::DrawObject()
 
     glCallLists(text.length(), GL_BYTE, text.c_str());
 
+    glDisable(GL_TEXTURE_2D);
     glEnable( GL_DEPTH_TEST );
     glDisable( GL_BLEND );
 }
@@ -183,3 +193,92 @@ void Text::print(int x, int y, std::string _text, int W, int H)
     glPopMatrix( );
 }
 
+Tail::Tail(GLuint texture)
+{
+    this->texture = texture;
+
+    for (int i=0; i < MAX_PARTICLES; i++)
+    {
+        particles[i].active=true;
+        particles[i].life=0.0f;
+        particles[i].fade=float(rand()%100)/1000.0f+0.003f;
+        particles[i].color=Vector(colors[(i+1)/(MAX_PARTICLES/12)][0], colors[(i+1)/(MAX_PARTICLES/12)][1], colors[(i+1)/(MAX_PARTICLES/12)][2]);
+        particles[i].position = Vector();
+        particles[i].direction=Vector(float((rand()%50)-26.0f)*10.0f, float((rand()%50)-25.0f)*10.0f, float((rand()%50)-25.0f)*10.0f);
+        particles[i].gravity = Vector(0.0f, -0.8f, 0.0f);
+    }
+
+    list  = glGenLists( 1 );
+    glBindTexture( GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
+
+    glNewList( list, GL_COMPILE );
+
+    glBegin(GL_QUADS);
+        glTexCoord2d(1,1); glVertex2f(+0.5f,+0.5f);
+        glTexCoord2d(0,1); glVertex2f(-0.5f,+0.5f);
+        glTexCoord2d(0,0); glVertex2f(-0.5f,-0.5f);
+        glTexCoord2d(1,0); glVertex2f(+0.5f,-0.5f);
+    glEnd();
+
+    glEndList();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+void Tail::DrawObject()
+{
+    static int col = 0;
+    col++;
+    col = col % 11;
+    float slowdown=2.0f;
+    velocity = Vector();
+
+    glDisable( GL_DEPTH_TEST );
+    glEnable(GL_BLEND);
+
+    glBindTexture( GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
+
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+
+    for (int i=0; i < MAX_PARTICLES; i++)
+    {
+        if (particles[i].active)
+        {
+            float x=particles[i].position.X();
+            float y=particles[i].position.Y();
+            float z=particles[i].position.Z();
+
+            glColor4f(particles[i].color.X(),particles[i].color.Y(),particles[i].color.Z(),particles[i].life);
+
+            glTranslatef(x, y, z);
+                glCallList(list);
+            glTranslatef(-x, -y, -z);
+
+            particles[i].position += particles[i].direction * (1/(slowdown*1000));
+            particles[i].direction += particles[i].gravity;
+            //particles[i].gravity = velocity;
+
+            particles[i].life-=particles[i].fade;
+
+            if (particles[i].life < 0.0f)
+            {
+                particles[i].life=1.0f;
+                particles[i].fade=float(rand()%100)/1000.0f+0.003f;
+
+                particles[i].position = Vector();
+                particles[i].direction = Vector(float((rand()%60)-32.0f), float((rand()%60)-30.0f), float((rand()%60)-30.0f));
+                //particles[i].gravity = velocity;
+
+                particles[i].color = Vector(colors[col][0], colors[col][1], colors[col][2]);
+            }
+        }
+    }
+    glColor4f(1, 1, 1, 1);
+
+    glEnable( GL_DEPTH_TEST );
+    glDisable( GL_BLEND );
+    glDisable(GL_TEXTURE_2D);
+
+}

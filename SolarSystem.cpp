@@ -142,6 +142,8 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     if (!type.compare("Comet"))
                     {
                         Comet* comBody = new Comet(orb[0], orb[1], orb[2], orb[3], orb[4], orb[5], orb[6]);
+                        Tail* tail = new Tail(tm.getTexture("Textures/flare.bmp"));
+                        comBody->addTail(tail);
                         addBody(comBody);
                         parseXML(*i, comBody);
                     }
@@ -191,7 +193,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 
                         Rings* rings = new Rings(r[1], r[2], tex);
                         //std::cout << p->name << std::endl;
-                        p->add(rings);
+                        //p->add(rings);
                     }
                 }
             }

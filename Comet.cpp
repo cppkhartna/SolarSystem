@@ -21,3 +21,9 @@ void Comet::Kepler(double GM, double T0, double T, double q, double e)
   //else
     //Hyperb (GM, T0, T, 1.0/invax, e);
 }
+
+void Comet::addTail(Tail *tail_new)
+{
+    tail = tail_new;
+    add(tail);
+}
