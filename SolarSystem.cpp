@@ -30,6 +30,7 @@ SolarSystem::~SolarSystem()
 
 void SolarSystem::addBody(CelestialBody *p)
 {
+    p->text = text;
     Bodies.push_back(p);
 }
 

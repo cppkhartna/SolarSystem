@@ -6,11 +6,16 @@ CelestialBody::~CelestialBody()
 
 void CelestialBody::Draw()
 {
+    text->setText(name);
+    text->setScale(1.0/16.0);
     std::list< Drawable* >::iterator it;
     for (it = seq.begin(); it != seq.end(); ++it)
     {
         (*it)->Draw();
     }
+    remove();
+    text->setScale(1.0);
+    text->setPos(Vector());
 }
 
 void CelestialBody::add(Drawable *object)
@@ -27,6 +32,7 @@ void CelestialBody::nextFrame(double T)
 {
     Vector pos = getPos(T);
     //std::cout << name << ": " << pos << std::endl;
+    add(text);
     std::list< Drawable* >::iterator it;
     for (it = seq.begin(); it != seq.end(); ++it)
     {

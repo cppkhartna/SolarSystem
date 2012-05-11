@@ -15,6 +15,7 @@ public:
     virtual double getScale() const;
     void setScale(double scale);
     std::string name;
+    Text* text;
 
 private:
     /* data */
