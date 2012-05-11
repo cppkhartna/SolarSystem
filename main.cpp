@@ -55,6 +55,13 @@ void init(int width, int height)
 
 }
 
+std::string convert(double value)
+{
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
+}
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
@@ -80,32 +87,20 @@ void display()
         frame = 0;
     }
 
-    std::ostringstream oss;
-    std::string _text = "FPS=";
-    oss << fps;
-    _text += oss.str();
-
     if (fps > 1)
         ss.setFPS(fps);
     ss.nextFrame();
 
-    ss.text->print(10, 10, _text, w, h);
+    ss.text->print(10, 20, std::string("FPS=")+convert(fps), w, h);
 
-    oss.str("");
-    oss.clear();
+    ss.text->print(10, 40, std::string("Delta = ")+convert(ss.getSpeed()), w, h);
+
     time_t raw;
     raw = ss.getTime();
-    oss << ctime(&raw);
-    _text = "Time = ";
-    _text += oss.str();
-    ss.text->print(40, 40, _text, w, h);
+    ss.text->print(10, 60, std::string("Solar time = ")+ctime(&raw), w, h);
+    raw = time(NULL);
+    ss.text->print(10, 80, std::string("World time = ")+ctime(&raw), w, h);
 
-    oss.str("");
-    oss.clear();
-    oss << ss.getSpeed();
-    _text = "Delta = ";
-    _text += oss.str();
-    ss.text->print(50, 60, _text, w, h);
 
     glFlush();
     glutSwapBuffers();
