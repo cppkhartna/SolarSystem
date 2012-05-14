@@ -110,7 +110,7 @@ Text::Text(GLuint texture)
 {
     this->texture = texture;
 
-    //NegeGL
+    //NeheGL
     float cx;   
     float cy;   
 
@@ -149,6 +149,11 @@ void Text::setText(std::string new_text)
     text = new_text;
 }
 
+void Text::setWScale(double WScale)
+{
+    this->WScale = WScale;
+}
+
 Text::~Text()
 {
     glDeleteLists(list, 256);
@@ -156,20 +161,27 @@ Text::~Text()
 
 void Text::DrawObject()
 {
-    glDisable( GL_DEPTH_TEST );
-    glEnable(GL_BLEND);
+    if (WScale != 0)
+    {
+        glScaled(1/WScale, 1/WScale, 1/WScale);
 
-    glBindTexture( GL_TEXTURE_2D, texture);
-    glEnable(GL_TEXTURE_2D);
+        glDisable( GL_DEPTH_TEST );
+        glEnable(GL_BLEND);
 
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-    glListBase(list - 32 + ( 128 * 0 ));
+        glBindTexture( GL_TEXTURE_2D, texture);
+        glEnable(GL_TEXTURE_2D);
 
-    glCallLists(text.length(), GL_BYTE, text.c_str());
+        glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+        glListBase(list - 32 + ( 128 * 0 ));
 
-    glDisable(GL_TEXTURE_2D);
-    glEnable( GL_DEPTH_TEST );
-    glDisable( GL_BLEND );
+        glCallLists(text.length(), GL_BYTE, text.c_str());
+
+        glDisable(GL_TEXTURE_2D);
+        glEnable( GL_DEPTH_TEST );
+        glDisable( GL_BLEND );
+
+        glScaled(WScale, WScale, WScale);
+    }
 }
 
 void Text::print(int x, int y, std::string _text, int W, int H)

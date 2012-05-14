@@ -54,11 +54,13 @@ public:
     void DrawObject();
     void setText(std::string new_text);
     void print(int x, int y, std::string _text, int W, int H);
+    void setWScale(double WScale);
 private:
     /* data */
     std::string text;
     GLuint texture;
     GLuint list;
+    double WScale;
 };
 
 typedef struct

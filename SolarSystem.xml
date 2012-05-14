@@ -62,8 +62,8 @@
             <Body radius="2410.3" texture="Textures/Satellites/callisto.bmp" />
         </Satellite>
         <Satellite name="Amalthea"
-            a="0.24251682081" e="0.0032" M0="185.194" n="26394123.3648"
-            O="0.498" i="0.38" w="155.873" >
+            a="0.54251682081" e="0.0032" M0="185.194" n="26394123.3648"
+            O="0.498" i="0.38" w="55.873" >
             <Body radius="83.45" texture="Textures/Satellites/amalthea.bmp" />
         </Satellite>
     </SolSysBody>
@@ -169,7 +169,7 @@
             <Body radius="270.34" texture="Textures/Satellites/triton.bmp" />
         </Satellite>
         <Satellite name="Proteus"
-            a="0.393207468317" e="0.0005" M0="250.938" n="11715964.4349"
+            a="1.193207468317" e="0.0005" M0="250.938" n="11715964.4349"
             O="1.122" i="0.075" w="67.968" >
             <Body radius="51.07" texture="Textures/Satellites/proteus.bmp" />
         </Satellite>

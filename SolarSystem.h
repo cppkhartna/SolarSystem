@@ -28,6 +28,8 @@ public:
     time_t getTime();
     double getSpeed();
     void setFPS(double fps);
+    void setWScale(double WScale);
+    void setPrompt(bool prompt);
 
 private:
     /* data */
@@ -40,6 +42,8 @@ private:
     double delta_delta;
     bool moves, steps;
     double fps;
+    double WScale;
+    bool prompt;
 };
 
 double scaleR(double r, CelestialBody* p);

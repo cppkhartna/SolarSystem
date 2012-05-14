@@ -10,6 +10,7 @@ SolarSystem ss;
 int mouse_x = 0, mouse_y = 0, mouse_button = -1, mouse_state = GLUT_UP;
 int frame=0, Time, timebase=0;
 double fps;
+bool prompt = false;
 int w, h;
 
 double x_angle = 0; // Угол поворота объектов
@@ -89,10 +90,12 @@ void display()
 
     if (fps > 1)
         ss.setFPS(fps);
+    ss.setWScale(scale);
+    ss.setPrompt(prompt);
+
     ss.nextFrame();
 
     ss.text->print(10, 20, std::string("FPS=")+convert(fps), w, h);
-
     ss.text->print(10, 40, std::string("Delta = ")+convert(ss.getSpeed()), w, h);
 
     time_t raw;
@@ -156,12 +159,15 @@ void keyPressed(unsigned char key, int x, int y)
         case ')': 
             ss.speedUp();
             break;
+        case 't':
+            prompt = !prompt;
+            break;
     }
 }
 
 void specialKeyPressed(int key, int x, int y) 
 {
-    usleep(100);
+    //usleep(100);
 
     switch (key) 
     {    

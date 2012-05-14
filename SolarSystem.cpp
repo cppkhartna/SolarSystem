@@ -30,7 +30,7 @@ SolarSystem::~SolarSystem()
 
 void SolarSystem::addBody(CelestialBody *p)
 {
-    p->text = text;
+    p->setText(text);
     Bodies.push_back(p);
 }
 
@@ -44,12 +44,21 @@ void SolarSystem::nextFrame()
             stop();
     }
 
+    if (prompt)
+        text->setWScale(WScale);
+    else
+        text->setWScale(0);
+
     std::list< CelestialBody* >::iterator it;
     for (it = Bodies.begin(); it != Bodies.end(); ++it)
     {
         (*it)->nextFrame(T);
         (*it)->Draw();
     }
+
+    text->setWScale(1);
+    text->setScale(1.0);
+    text->setPos(Vector());
 }
 
 void SolarSystem::speedUp()
@@ -77,6 +86,16 @@ double SolarSystem::getSpeed()
 void SolarSystem::setFPS(double fps)
 {
     this->fps = fps;
+}
+
+void SolarSystem::setWScale(double WScale)
+{
+    this->WScale = WScale;
+}
+
+void SolarSystem::setPrompt(bool prompt)
+{
+    this->prompt = prompt;
 }
 
 void SolarSystem::move()
