@@ -248,7 +248,7 @@ void Tail::DrawObject()
     static int elapsed = 0;
     int Time=glutGet(GLUT_ELAPSED_TIME);
 
-    std::cout << Time - elapsed << std::endl;
+    //std::cout << Time - elapsed << std::endl;
     if (Time - elapsed > 6)
        elapsed = Time;
     else

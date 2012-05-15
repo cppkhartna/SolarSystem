@@ -15,11 +15,12 @@ public:
     virtual double getScale() const;
     void setScale(double scale);
     void setText(Text* text);
-    std::string name;
+    void setName(std::string name);
 
 private:
     /* data */
     std::list< Drawable* > seq;
     double scale;
     Text* text;
+    std::string name;
 };

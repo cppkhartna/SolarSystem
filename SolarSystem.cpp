@@ -139,24 +139,20 @@ void SolarSystem::readXML(string filename)
 
 void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
 {
-    //std::cout << std::endl;
-    //std::cout << p << std::endl;
     const xmlpp::Node::NodeList items = node->get_children();
     for (auto i = items.begin(); i != items.end(); ++i)
     {
         const xmlpp::Element *elem = dynamic_cast<const xmlpp::Element *>(*i);
         if (elem)
         {
-        //std::cout << "Йо, нигга" << std::endl;
             auto type = elem->get_name();
             if (solarTypes.find(type) != solarTypes.end())
             {
                 auto name = elem->get_attribute("name")->get_value();
-                //std::cout << type << ": " << name << std::endl;
                 if (!type.compare("CelestialBody"))
                 {
                     CelestialBody* celBody = new CelestialBody();
-                    celBody->name = name;
+                    celBody->setName(name);
                     addBody(celBody);
                     parseXML(*i, celBody);
                 }
@@ -168,12 +164,11 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     for (auto i = ++(attr.begin()); i != attr.end(), j < 7; ++i, ++j)
                     {
                         orb[j] = atof((*i)->get_value().c_str());
-                        //std::cout << orb[j] << std::endl;
                     }
                     if (!type.compare("SolSysBody"))
                     {
                         SolSysBody* sysBody = new SolSysBody(orb[0], orb[1], orb[2], orb[3], orb[4], orb[5], orb[6]);
-                        sysBody->name = name;
+                        sysBody->setName(name);
                         addBody(sysBody);
                         parseXML(*i, sysBody);
                     }
@@ -181,6 +176,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     {
                         Comet* comBody = new Comet(orb[0], orb[1], orb[2], orb[3], orb[4], orb[5], orb[6]);
                         Tail* tail = new Tail(tm.getTexture("Textures/flare.bmp"));
+                        comBody->setName(name);
                         comBody->addTail(tail);
                         addBody(comBody);
                         parseXML(*i, comBody);
@@ -189,7 +185,7 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                     {
                         Satellite* satBody = new Satellite(orb[0], orb[1], orb[2], orb[3], orb[4], orb[5], orb[6]);
                         satBody->setPlanet(dynamic_cast<SolSysBody*>(p));
-                        satBody->name = name;
+                        satBody->setName(name);
                         addBody(satBody);
                         parseXML(*i, satBody);
                     }
@@ -201,7 +197,6 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                 {
                     auto texture = string((elem->get_attribute("texture")->get_value()).c_str());
                     GLuint tex = tm.getTexture(texture);
-                    //std::cout << type << ": " << texture << std::endl;
                     if (!type.compare("Body"))
                     {
                         auto R = elem->get_attribute("radius")->get_value();
@@ -209,8 +204,6 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                         r = scaleR(r, p);
 
                         Body* body = new Body(r, tex);
-                        //std::cout << r << std::endl;
-                        std::cout << p->name << " " << r << std::endl;
                         p->add(body);
                     }
                     if (!type.compare("Rings"))
@@ -226,11 +219,9 @@ void SolarSystem::parseXML(const xmlpp::Node* node, CelestialBody* p)
                             auto R = elem->get_attribute(text)->get_value();
                             r[i] = atof(R.c_str());
                             r[i] = scaleR(r[i], p);
-                            //std::cout << r[i] << std::endl;
                         }
 
                         Rings* rings = new Rings(r[1], r[2], tex);
-                        //std::cout << p->name << std::endl;
                         p->add(rings);
                     }
                 }

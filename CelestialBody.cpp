@@ -44,6 +44,11 @@ void CelestialBody::setText(Text* text)
     add(text);
 }
 
+void CelestialBody::setName(std::string name)
+{
+    this->name = name;
+}
+
 Vector CelestialBody::getPos(double T)
 {
     return Vector();
