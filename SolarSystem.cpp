@@ -48,6 +48,7 @@ void SolarSystem::nextFrame()
         text->setWScale(WScale);
     else
         text->setWScale(0);
+    text->setIncl(WIncle);
 
     std::list< CelestialBody* >::iterator it;
     for (it = Bodies.begin(); it != Bodies.end(); ++it)
@@ -59,6 +60,7 @@ void SolarSystem::nextFrame()
     text->setWScale(1);
     text->setScale(1.0);
     text->setPos(Vector());
+    text->setIncl(Vector());
 }
 
 void SolarSystem::speedUp()
@@ -83,6 +85,11 @@ double SolarSystem::getSpeed()
     return delta/DAY;
 }
 
+Text* SolarSystem::getText()
+{
+    return text;
+}
+
 void SolarSystem::setFPS(double fps)
 {
     this->fps = fps;
@@ -91,6 +98,11 @@ void SolarSystem::setFPS(double fps)
 void SolarSystem::setWScale(double WScale)
 {
     this->WScale = WScale;
+}
+
+void SolarSystem::setWIncl(Vector WIncle)
+{
+    this->WIncle = WIncle;
 }
 
 void SolarSystem::setPrompt(bool prompt)

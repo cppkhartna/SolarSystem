@@ -24,12 +24,13 @@ public:
     void move();
     void step();
     void stop();
-    Text* text;
     time_t getTime();
     double getSpeed();
+    Text* getText();
     void setFPS(double fps);
     void setWScale(double WScale);
     void setPrompt(bool prompt);
+    void setWIncl(Vector WIncle);
 
 private:
     /* data */
@@ -37,12 +38,14 @@ private:
     std::set<Glib::ustring> solarTypes;
     std::set<Glib::ustring> drawTypes;
     TextureManager tm;
+    Text* text;
     double T; //time
     double delta;
     double delta_delta;
     bool moves, steps;
     double fps;
     double WScale;
+    Vector WIncle;
     bool prompt;
 };
 

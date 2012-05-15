@@ -106,6 +106,11 @@ void Drawable::setScale(double scale)
     this->scale = scale;
 }
 
+void Drawable::setIncl(Vector incl)
+{
+    this->incl = incl;
+}
+
 Text::Text(GLuint texture)
 {
     this->texture = texture;

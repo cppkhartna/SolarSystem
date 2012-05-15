@@ -53,7 +53,7 @@ void init(int width, int height)
 
     ss.init();
     ss.readXML("SolarSystem.xml");
-
+    ss.setWScale(scale);
 }
 
 std::string convert(double value)
@@ -75,6 +75,8 @@ void display()
     glRotated(x_angle,1,0,0);
     glRotated(y_angle,0,0,1);
 
+    ss.setWIncl(Vector(-x_angle, yrot-360, -y_angle));
+
     glTranslatef(0.0f,0.0f,-xpos);
     glScalef(scale, scale, scale);
 
@@ -84,25 +86,22 @@ void display()
     if (Time - timebase > 1000) 
     {
         fps = frame*1000.0/(Time-timebase);
+        if (fps > 1)
+            ss.setFPS(fps);
         timebase = Time;
         frame = 0;
     }
 
-    if (fps > 1)
-        ss.setFPS(fps);
-    ss.setWScale(scale);
-    ss.setPrompt(prompt);
-
     ss.nextFrame();
 
-    ss.text->print(10, 20, std::string("FPS=")+convert(fps), w, h);
-    ss.text->print(10, 40, std::string("Delta = ")+convert(ss.getSpeed()), w, h);
+    ss.getText()->print(10, 20, std::string("FPS=")+convert(fps), w, h);
+    ss.getText()->print(10, 40, std::string("Delta = ")+convert(ss.getSpeed()), w, h);
 
     time_t raw;
     raw = ss.getTime();
-    ss.text->print(10, 60, std::string("Solar time = ")+ctime(&raw), w, h);
+    ss.getText()->print(10, 60, std::string("Solar time = ")+ctime(&raw), w, h);
     raw = time(NULL);
-    ss.text->print(10, 80, std::string("World time = ")+ctime(&raw), w, h);
+    ss.getText()->print(10, 80, std::string("World time = ")+ctime(&raw), w, h);
 
 
     glFlush();
@@ -147,11 +146,11 @@ void keyPressed(unsigned char key, int x, int y)
             break;
         case '-': 
             scale /= 2;
-            std::cout << scale << std::endl;
+            ss.setWScale(scale);
             break;
         case '+': case '=': 
             scale *= 2;
-            std::cout << scale << std::endl;
+            ss.setWScale(scale);
             break;
         case '(': 
             ss.slowDown();
@@ -161,6 +160,7 @@ void keyPressed(unsigned char key, int x, int y)
             break;
         case 't':
             prompt = !prompt;
+            ss.setPrompt(prompt);
             break;
     }
 }

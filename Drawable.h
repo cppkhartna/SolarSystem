@@ -11,6 +11,7 @@ public:
     virtual void DrawObject(){};
     void setPos(Vector pos);
     void setScale(double scale);
+    void setIncl(Vector incl);
 
 private:
     /* data */
