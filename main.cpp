@@ -70,14 +70,13 @@ void display()
 
     glMatrixMode(GL_MODELVIEW);
 
-    glRotatef(360.0f-yrot, 0.0f, 1.0f, 0.0f);
+    glTranslatef(0.0f,0.0f,-xpos);
 
     glRotated(x_angle,1,0,0);
-    glRotated(y_angle,0,0,1);
+    glRotated(y_angle,0,1,0);
 
-    ss.setWIncl(Vector(-x_angle, yrot-360, -y_angle));
+    ss.setWIncl(Vector(-x_angle, 360-y_angle, 0));
 
-    glTranslatef(0.0f,0.0f,-xpos);
     glScalef(scale, scale, scale);
 
     frame++;
