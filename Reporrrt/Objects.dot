@@ -1,0 +1,13 @@
+digraph G{ 
+    "SolarSystem ss"->"Text* text";
+    "SolarSystem ss"->"TextureManager tm";
+    "SolarSystem ss"->"list<CelestialBody *> Bodies";
+    "list<CelestialBody *> Bodies"->"Bodies.begin()";
+    "list<CelestialBody *> Bodies"->"...";
+    "list<CelestialBody *> Bodies"->"Bodies.end()";
+
+    "Bodies.begin()"->"list<Drawable *> seq";
+    "list<Drawable *> seq"->"seq.begin()";
+    "list<Drawable *> seq"->"....";
+    "list<Drawable *> seq"->"seq.end()";
+}

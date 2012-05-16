@@ -1,0 +1,40 @@
+digraph G{ 
+    { //Уровни 
+        node[shape=plaintext, fontcolor="white"];
+        edge[color=white];
+        5->4->3;
+    }
+    {
+        node[shape=rectangle];
+        CelestialBody->SolarSystem [arrowhead = odiamond ];
+    }
+    {
+        node[shape=rectangle];
+        rank=same; 5; SolarSystem; CelestialBody; Drawable; 
+    }
+    {
+        node[shape=rectangle];
+        rank=same; 4; Body; Rings; Tail; Text; SolSysBody;
+    }
+    {
+        node[shape=rectangle];
+        rank=same; 3; Comet; Satellite;
+    }
+
+    Body->Drawable[arrowhead = empty ];
+    Rings->Drawable[arrowhead = empty ];
+    Tail->Drawable[arrowhead = empty ];
+    Text->Drawable[arrowhead = empty ];
+
+    SolSysBody->CelestialBody[arrowhead = empty ];
+    Comet->SolSysBody[arrowhead = empty ];
+    Satellite->SolSysBody[arrowhead = empty ];
+    Satellite->SolSysBody[style="dashed", arrowhead = open];
+    Tail->Comet[style="dashed", arrowhead = open];
+
+    Drawable->CelestialBody[arrowhead = odiamond];
+
+    Comet->Satellite[color=white];
+    Body->Rings->Tail[color=white];
+}
+
